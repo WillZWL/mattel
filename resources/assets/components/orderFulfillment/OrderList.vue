@@ -7,11 +7,6 @@
   }
 </style>
 <template>
-<ul>
-<li>New</li>
-<li>Ready</li>
-<li>shipped</li>
-</ul>
   <table id="{{id}}" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
     <thead>
       <tr>
@@ -50,14 +45,15 @@
         <td>{{item.payment_method}}</td>
         <td>{{item.order_qty}}</td>
         <td>{{item.inventory}}</td>
-        <td v-if="id == 'table_content2'">
-          <input type="text" name="tracking_no" class="col-md form-control input_sm tracking-no-{{item.esg_so_no}}"
-            v-on:change="scanTrackingNo(item.esg_so_no)">
-        </td>
         <td v-if="id != 'table_content4'">
-          <button v-if="id == 'table_content1'" type="button" class="btn btn-primary btn-sm"
-                  v-on:click="readyToShip(item.esg_so_no)">Ready to Ship
-          </button><br />
+          <template v-if="id == 'table_content1'">
+            <button v-if="item.inventory > item.order_qty" type="button" class="btn btn-sm btn-primary"
+                    data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+                    Ready To Ship</button>
+            <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
+                    Ready To Ship</button>
+            <br />
+          </template>
           <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(item.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
       </tr>
@@ -71,8 +67,11 @@
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
+              data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+              Ready To Ship</button>
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders">
-            Ready To Ship</button>
+            Scan Tracking No.</button>
     <button v-if="id != 'table_content4'" type="button" class="btn btn-danger"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders">
             <i class="fa fa-trash-o"></i>  Cancel</button>
@@ -113,7 +112,6 @@
           'Payment Method',
           'Item QTY',
           'Inventory',
-          'Scan Tracking No.',
           'Action'
         ],
         shipped_headers: [
@@ -130,12 +128,7 @@
     },
     methods: {
       init() {
-        var table_selector = '#'+this.id;
-        var table = $(table_selector).DataTable({
-          // fixedHeader: true,
-          bSort:false,
-          buttons: []
-        });
+
       },
       allocateOrders: function(orders)
       {

@@ -1,6 +1,6 @@
 'use strict';
 
-require('./bootstrap');
+require('./boot');
 
 import Vue from 'vue';
 import App from '../components/App.vue';
