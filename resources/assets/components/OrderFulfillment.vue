@@ -16,12 +16,6 @@
                   data-toggle="tab" aria-expanded="false"
                   v-on:click="changeOrderStatus('ready')">Ready To Ship</a>
               </li>
-              <!-- <li role="presentation" class="">
-                <a href="#tab_content3" role="tab" id="in-transit"
-                data-toggle="tab" aria-expanded="false"
-                v-on:click="changeOrderStatus('in-transit')">In Transit</a>
-              </li>
-              -->
               <li role="presentation" class="">
                 <a href="#tab_content4" role="tab" id="shipped"
                 data-toggle="tab" aria-expanded="false"
@@ -35,10 +29,6 @@
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready">
                 <order-list :id="'table_content2'" :items='items'></order-list>
               </div>
-              <!-- <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="in-transit">
-                <order-list :id="'table_content3'" :items='items'></order-list>
-              </div>
-              -->
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="shipped">
                 <order-list :id="'table_content4'" :items='items'></order-list>
               </div>

@@ -47,12 +47,10 @@
         <td>{{item.inventory}}</td>
         <td v-if="id != 'table_content4'">
           <template v-if="id == 'table_content1'">
-            <button v-if="item.inventory > item.order_qty" type="button" class="btn btn-sm btn-primary"
-                    data-toggle="tooltip" data-placement="bottom" title="For selected orders">
-                    Ready To Ship</button>
+            <button v-if="item.inventory > item.order_qty" type="button" class="btn btn-sm btn-primary">
+                    Ready To Ship</button> &nbsp;&nbsp;
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
-            <br />
           </template>
           <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(item.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
