@@ -17,9 +17,9 @@ require('laravel-elixir-livereload');
 elixir(mix => {
     mix.sass('app.scss');
     mix.styles(['custom.css'], 'public/css/custom.css');
-    mix.copy('./node_modules/bootstrap/dist/fonts/', 'public/fonts/');
-    mix.copy('./node_modules/font-awesome/fonts', 'public/fonts/');
-    mix.copy('./node_modules/jquery/dist/jquery.min.js', 'public/js/jquery.min.js');
+    // mix.copy('./node_modules/bootstrap/dist/fonts/', 'public/fonts/');
+    // mix.copy('./node_modules/font-awesome/fonts', 'public/fonts/');
+    // mix.copy('./node_modules/jquery/dist/jquery.min.js', 'public/js/jquery.min.js');
     mix.browserify('app.js');
     mix.browserify('custom.js');
     mix.browserify('auth/index.js', 'public/js/index.js');

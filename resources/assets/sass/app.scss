@@ -1,15 +1,12 @@
 // Bootstrap
-@import "./node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
-
-@import "./node_modules/select2/dist/css/select2.min.css";
-
-@import "./node_modules/font-awesome/css/font-awesome.min.css";
+@import "node_modules/font-awesome/scss/font-awesome";
 @font-face {
   font-family: 'FontAwesome';
   src: url('../fonts/fontawesome-webfont.eot');
@@ -17,6 +14,7 @@
   font-weight: normal;
   font-style: normal;
 }
+@import "node_modules/select2/src/scss/core";
 
 /*@import "./node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css";
 @import "./node_modules/datatables.net-buttons-bs/css/buttons.bootstrap.min.css";

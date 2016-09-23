@@ -22,7 +22,7 @@
           <h3>General</h3>
           <ul class="nav side-menu">
             <li>
-              <a v-link="'/test'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+              <a v-link="'/login'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
             </li>
           </ul>
         </div>
