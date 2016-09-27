@@ -12,10 +12,16 @@ Vue.config.devtools = true
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_tokens');
-
-// Check the user's auth status when the app start
-// auth.checkAuth()
+function requireAuth (route, redirect, next) {
+  if (!auth.checkAuth()) {
+    redirect({
+      path: '/login',
+      query: { redirect: route.fullPath }
+    })
+  } else {
+    next()
+  }
+}
 
 var router = new VueRouter({
   mode: 'history',
@@ -34,12 +40,11 @@ router.map({
     '/order': {
         name: 'Order Fulfilment',
         component: require('../components/OrderFulfillment.vue'),
-        auth: true
+        beforeEnter: requireAuth
     },
     '/login': {
         name:'Login In',
-        component: require('../components/auth/Login.vue'),
-        auth: false
+        component: require('../components/auth/Login.vue')
     }
 })
 

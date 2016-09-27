@@ -22,7 +22,7 @@ elixir(mix => {
     // mix.copy('./node_modules/jquery/dist/jquery.min.js', 'public/js/jquery.min.js');
     mix.browserify('app.js');
     mix.browserify('custom.js');
-    mix.browserify('auth/index.js', 'public/js/index.js');
+    mix.browserify('auth.js', 'public/js/index.js');
     mix.version(['public/js/app.js', 'public/js/custom.js']);
     mix.livereload();
 });
