@@ -1,7 +1,4 @@
 <style>
-body {
-  background:#F7F7F7;
-}
 .error {
   color: red;
 }
@@ -13,7 +10,10 @@ body {
 }
 </style>
 <template>
-  <div class="container" v-if="!authenticated">
+  <section style="height: 90px">
+
+  </section>
+  <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -47,9 +47,6 @@ body {
             </div>
         </div>
     </div>
-  </div>
-  <div v-else>
-    logged
   </div>
 </template>
 

@@ -100,7 +100,7 @@
         $('#sidebar-menu').find('li.active-sm').addClass('active').removeClass('active-sm');
       }
 
-      $('body').toggleClass('nav-md nav-sm');
+      $('app').toggleClass('nav-md nav-sm');
 
       setContentHeight();
     });
