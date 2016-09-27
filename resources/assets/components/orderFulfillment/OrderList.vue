@@ -19,7 +19,7 @@
         <template v-if="id == 'table_content2'">
           <th v-for="header in ready_headers">{{header}}</th>
         </template>
-        <template v-if="id == 'table_content4'">
+        <template v-if="id == 'table_content3'">
           <th v-for="header in shipped_headers">{{header}}</th>
         </template>
       </tr>
@@ -27,7 +27,7 @@
     <tbody>
       <tr v-for="order in orders">
         <td class="a-center td_checkbox">
-          <input type="checkbox" class="flat" name="id" value="">
+          <input type="checkbox" class="flat" name="id" value="{{order.id}}">
         </td>
         <td>{{order.biz_type}}</td>
         <td>{{order.merchant}}</td>
@@ -47,7 +47,7 @@
           <p v-for="(sku, qty) in order.items">{{sku}} Qty:{{qty}}</p>
         </td>
         <td>{{order.inventory}}</td>
-        <td v-if="id != 'table_content4'">
+        <td v-if="id != 'table_content3'">
           <template v-if="id == 'table_content1'">
             <button v-if="order.inventory > order.order_qty" type="button" class="btn btn-sm btn-primary">
                     Ready To Ship</button> &nbsp;&nbsp;
@@ -59,21 +59,30 @@
       </tr>
     </tbody>
   </table>
-  <div v-if="id != 'table_content4'" class="x_content">
-    <button v-if="id == 'table_content1'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  Picking List</button>
-    <button v-if="id == 'table_content2'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  Invoice</button>
-    <button v-if="id == 'table_content2'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  AWB label</button>
+  <div v-if="id != 'table_content3'" class="x_content">
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-default"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="printPickingList()"><i class="fa fa-print"></i>  Picking List</button>
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-default" data-toggle="tooltip"
+            data-placement="bottom" title="For selected orders"
+            v-on:click="printInvoice()"><i class="fa fa-print"></i>  Invoice</button>
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-default"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="printAWBLable()"><i class="fa fa-print"></i>  AWB label</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
-              data-toggle="tooltip" data-placement="bottom" title="For selected orders">
-              Ready To Ship</button>
+              data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="readyToShip()"
+            >Ready To Ship</button>
     <button v-if="id == 'table_content2'" type="button" class="btn btn-primary"
-            data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="scanTrackingNo()">
             Scan Tracking No.</button>
-    <button v-if="id != 'table_content4'" type="button" class="btn btn-danger"
-            data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+    <button v-if="id != 'table_content3'" type="button" class="btn btn-danger"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="cancel()">
             <i class="fa fa-trash-o"></i>  Cancel</button>
   </div>
 </template>
@@ -130,31 +139,60 @@
       init() {
 
       },
-      allocateOrders: function(orders)
+      printPickingList: function() {
+        var orders =  $('input:checkbox[name=id]:checked');
+        if (orders.length === 0) {
+           $.isLoading({ text: "Please Select order First", class:"fa fa-refresh fa-spin"});
+           setTimeout( function(){
+            $.isLoading("hide");
+          }, 500)
+        };
+        var post_ids = [];
+        $.each(orders, function() {
+          post_ids.push(this.value);
+        });
+        console.log(post_ids);
+        this.$http.post(
+          'http://vanguard.dev/api/merchant-api/order-picking-list',
+          {
+            id: post_ids
+          }
+          ).then(function (response) {
+
+        });
+      },
+      printInvoice: function(orders =[]) {
+
+      },
+      printAWBLable: function(orders = []) {
+
+      },
+
+      allocateOrders: function(orders = [])
       {
         $.isLoading({ text: "All order with available stock moving to Ready to Ship", class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
       },
-      readyToShip: function(order_no)
+      readyToShip: function(orders = [])
       {
-        $.isLoading({ text: "Setting "+order_no+ " to Ready To Ship", class:"fa fa-refresh fa-spin" });
+        $.isLoading({ text: "Setting Ready To Ship", class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
       },
-      cancel: function(order_no)
+      cancel: function(orders = [])
       {
-        $.isLoading({ text: order_no + " Canceling", class:"fa fa-refresh fa-spin" });
+        $.isLoading({ text: "Canceling", class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
       },
-      scanTrackingNo: function(order_no)
+      scanTrackingNo: function(orders = [])
       {
-        var tracking_no = $(".tracking-no-"+order_no).val();
-        $.isLoading({ text: order_no + " Shipped, TrackingNo is "+ tracking_no, class:"fa fa-refresh fa-spin" });
+        var tracking_no = $(".tracking-no-"+orders).val();
+        $.isLoading({ text:"Shipped", class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)

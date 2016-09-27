@@ -17,20 +17,20 @@
                   v-on:click="changeOrderStatus('ready')">Ready To Ship</a>
               </li>
               <li role="presentation" class="">
-                <a href="#tab_content4" role="tab" id="shipped"
+                <a href="#tab_content3" role="tab" id="shipped"
                 data-toggle="tab" aria-expanded="false"
                 v-on:click="changeOrderStatus('shipped')">Shipped</a>
               </li>
             </ul>
             <div id="myTabContent" class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new">
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new" v-if="status == 'new'">
                 <order-list :id="'table_content1'" :orders='orders'></order-list>
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready">
+              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready" v-if="status == 'ready'">
                 <order-list :id="'table_content2'" :orders='orders'></order-list>
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="shipped">
-                <order-list :id="'table_content4'" :orders='orders'></order-list>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="shipped" v-if="status =='shipped'">
+                <order-list :id="'table_content3'" :orders='orders'></order-list>
               </div>
             </div>
           </div>
@@ -49,7 +49,8 @@
     },
     data() {
       return {
-        orders: []
+        orders: [],
+        status: 'new'
       }
     },
     ready() {
@@ -62,10 +63,68 @@
       changeOrderStatus: function(status) {
         $.isLoading({ text: "Loading  "+ status + " orders", class:"fa fa-refresh fa-spin" });
         this.$http({
-          url:'http://admincentre.eservicesgroup.com:7890/api/getOrders?status='+status,
+          url:'http://vanguard.dev/api/getOrders?status='+status,
           method: 'get'
         }).then(function (response) {
           this.$set('orders', response.data.data);
+        }).then(function(){
+          if ($("input.flat")[0]) {
+            $('input.flat').iCheck({
+              checkboxClass: 'icheckbox_flat-green'
+            });
+          }
+          // Table
+          $('table input').on('ifChecked', function () {
+              checkState = '';
+              $(this).parent().parent().parent().addClass('selected');
+              countChecked();
+          });
+          $('table input').on('ifUnchecked', function () {
+              checkState = '';
+              $(this).parent().parent().parent().removeClass('selected');
+              countChecked();
+          });
+
+          var checkState = '';
+          $('.bulk_action input').on('ifChecked', function () {
+              checkState = '';
+              $(this).parent().parent().parent().addClass('selected');
+              countChecked();
+          });
+
+          $('.bulk_action input').on('ifUnchecked', function () {
+              checkState = '';
+              $(this).parent().parent().parent().removeClass('selected');
+              countChecked();
+          });
+
+          $('.bulk_action input#check-all').on('ifChecked', function () {
+              checkState = 'all';
+              countChecked();
+          });
+
+          $('.bulk_action input#check-all').on('ifUnchecked', function () {
+              checkState = 'none';
+              countChecked();
+          });
+
+          function countChecked() {
+              if (checkState === 'all') {
+                  $(".bulk_action input[name='id']").iCheck('check');
+              }
+              if (checkState === 'none') {
+                  $(".bulk_action input[name='id']").iCheck('uncheck');
+              }
+
+              var checkCount = $(".bulk_action input[name='id']:checked").length;
+              if (checkCount) {
+                  $('.column-title').hide();
+                  $('.bulk-actions').show();
+              } else {
+                  $('.column-title').show();
+                  $('.bulk-actions').hide();
+              }
+          }
         });
         setTimeout( function(){
           $.isLoading("hide");
