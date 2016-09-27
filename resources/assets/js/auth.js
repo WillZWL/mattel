@@ -16,6 +16,7 @@ export default {
 
     context.$http.post(TOKEN_URL, creds).then((response) => {
       localStorage.setItem('access_token', response.data.access_token)
+      context.$http.headers.common['Authorization'] = 'Bearer ' + localStorage.access_token;
       this.user.authenticated = true
       cb(true)
       return
