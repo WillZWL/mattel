@@ -17,7 +17,7 @@ export default {
     context.$http.post(TOKEN_URL, creds).then(function (response) {
       console.log('fasdf');
       console.log(response)
-      localStorage.setItem('access_token', response.body.access_token)
+      localStorage.setItem('access_token', response.data.access_token)
       this.user.authenticated = true
       cb(true)
       return

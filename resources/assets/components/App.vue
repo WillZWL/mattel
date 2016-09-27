@@ -1,7 +1,7 @@
 <template>
   <div class="container body">
     <div id="app">
-      <div class="main_container">
+      <div class="main_container" v-if="auth">
         <sidebar></sidebar>
         <navbar></navbar>
         <!-- Main content -->
@@ -17,6 +17,9 @@
         <!-- /.content -->
         <footbar></footbar>
       </div>
+      <div class="main_container">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +32,15 @@ import Footbar from './common/Footbar.vue';
 import store from '../vuex/store';
 
 export default {
+  ready() {
+    console.log(this);
+    this.$set('auth', this.$route.auth)
+  },
+  data() {
+    return {
+      auth:false
+    }
+  },
   components: {
   Titlebar,
   Navbar,

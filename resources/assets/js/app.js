@@ -33,10 +33,13 @@ var router = new VueRouter({
 router.map({
     '/order': {
         name: 'Order Fulfilment',
-        component: require('../components/OrderFulfillment.vue')
+        component: require('../components/OrderFulfillment.vue'),
+        auth: true
     },
     '/login': {
-      component: require('../components/auth/Login.vue')
+        name:'Login In',
+        component: require('../components/auth/Login.vue'),
+        auth: false
     }
 })
 
