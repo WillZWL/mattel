@@ -53,6 +53,9 @@ router.beforeEach((transition) => {
         }
     } else if (transition.to.path == '/login' && auth.checkAuth()) {
       transition.redirect('/')
+    } else if (transition.to.path == '/logout') {
+      auth.logout()
+      transition.redirect('login')
     }
 
     transition.next()
