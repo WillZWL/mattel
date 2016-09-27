@@ -1,3 +1,17 @@
+<style>
+body {
+  background:#F7F7F7;
+}
+.error {
+  color: red;
+}
+.login{
+  padding: 10px 20px;
+  margin-left: 0px;
+  z-index: 2;
+  background:#F7F7F7;
+}
+</style>
 <template>
   <div class="container" v-if="!authenticated">
     <div class="row">
@@ -72,9 +86,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.error {
-  color: red;
-}
-</style>

@@ -1,3 +1,11 @@
+<style>
+  .login{
+    padding: 10px 20px;
+    margin-left: 0px;
+    z-index: 2;
+    background:#F7F7F7;
+  }
+</style>
 <template>
   <div class="container body">
     <div id="app">
@@ -18,7 +26,9 @@
         <footbar></footbar>
       </div>
       <div class="main_container" v-else>
-        <router-view></router-view>
+        <div class="login" role="main">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -33,13 +43,13 @@ import store from '../vuex/store';
 import auth from '../js/auth'
 
 export default {
-  // ready() {
-  //   console.log(authenticated);
-  // },
+  ready() {
+    console.log(this);
+  },
   data() {
     return {
       flag: true,
-      authenticated: auth.checkAuth()
+      authenticated: this.authenticated
     }
   },
   components: {
