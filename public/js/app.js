@@ -36429,6 +36429,7 @@ exports.default = {
   // },
   data: function data() {
     return {
+      flag: true,
       authenticated: _auth2.default.checkAuth()
     };
   },
@@ -36443,15 +36444,15 @@ exports.default = {
   replace: false
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"authenticated\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\" v-else=\"\">\n    ssjdsljds\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"flag\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\" v-else=\"\">\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-1ce942a4", module.exports)
+    hotAPI.createRecord("_v-029d7542", module.exports)
   } else {
-    hotAPI.update("_v-1ce942a4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-029d7542", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"../js/auth":39,"../vuex/store":41,"./common/Footbar.vue":31,"./common/Navbar.vue":32,"./common/Sidebar.vue":33,"./common/Titlebar.vue":34,"vue":26,"vue-hot-reload-api":23}],29:[function(require,module,exports){
@@ -36663,9 +36664,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-7b84c7bd", module.exports)
+    hotAPI.createRecord("_v-329445df", module.exports)
   } else {
-    hotAPI.update("_v-7b84c7bd", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-329445df", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./orderFulfillment/OrderFilters.vue":36,"./orderFulfillment/OrderList.vue":37,"vue":26,"vue-hot-reload-api":23}],30:[function(require,module,exports){
@@ -36707,7 +36708,7 @@ exports.default = {
         if (!loggedIn) {
           _this.error = true;
         } else {
-          _this.$router.replace(_this.$route.query.redirect || '/dashboard');
+          _this.$router.replace(_this.$route.query.redirect || '/order');
         }
       });
     }
@@ -36724,9 +36725,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-2513bccf", module.exports)
+    hotAPI.createRecord("_v-449cfc71", module.exports)
   } else {
-    hotAPI.update("_v-2513bccf", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-449cfc71", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"../../js/auth":39,"vue":26,"vue-hot-reload-api":23,"vueify/lib/insert-css":27}],31:[function(require,module,exports){
@@ -36736,9 +36737,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-7ce3e34e", module.exports)
+    hotAPI.createRecord("_v-30a081f0", module.exports)
   } else {
-    hotAPI.update("_v-7ce3e34e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-30a081f0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23}],32:[function(require,module,exports){
@@ -36748,9 +36749,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-6c9c0392", module.exports)
+    hotAPI.createRecord("_v-a313f956", module.exports)
   } else {
-    hotAPI.update("_v-6c9c0392", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-a313f956", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23}],33:[function(require,module,exports){
@@ -36837,9 +36838,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-44b42b76", module.exports)
+    hotAPI.createRecord("_v-dd3aee32", module.exports)
   } else {
-    hotAPI.update("_v-44b42b76", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-dd3aee32", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23}],34:[function(require,module,exports){
@@ -36849,9 +36850,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-f737f0bc", module.exports)
+    hotAPI.createRecord("_v-483b3d40", module.exports)
   } else {
-    hotAPI.update("_v-f737f0bc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-483b3d40", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23}],35:[function(require,module,exports){
@@ -36876,9 +36877,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-794849ad", module.exports)
+    hotAPI.createRecord("_v-3c71a4cf", module.exports)
   } else {
-    hotAPI.update("_v-794849ad", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-3c71a4cf", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23,"vueify/lib/insert-css":27}],36:[function(require,module,exports){
@@ -36907,9 +36908,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-0eda8b62", module.exports)
+    hotAPI.createRecord("_v-cad67926", module.exports)
   } else {
-    hotAPI.update("_v-0eda8b62", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-cad67926", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":26,"vue-hot-reload-api":23,"vueify/lib/insert-css":27}],37:[function(require,module,exports){
@@ -36984,9 +36985,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-4b44f47a", module.exports)
+    hotAPI.createRecord("_v-11eeb01c", module.exports)
   } else {
-    hotAPI.update("_v-4b44f47a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-11eeb01c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./OrderDetail.vue":35,"vue":26,"vue-hot-reload-api":23,"vueify/lib/insert-css":27}],38:[function(require,module,exports){
@@ -37021,30 +37022,48 @@ _vue2.default.config.devtools = true;
 _vue2.default.use(_vueRouter2.default);
 _vue2.default.use(_vueResource2.default);
 
-_vue2.default.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_tokens');
+var router = new _vueRouter2.default();
 
-// Check the user's auth status when the app start
-// auth.checkAuth()
+// function requireAuth (route, redirect, next) {
+//   if (!auth.checkAuth()) {
+//     redirect({
+//       path: '/login',
+//       query: { redirect: route.fullPath }
+//     })
+//   } else {
+//     next()
+//   }
+// }
+
 var router = new _vueRouter2.default();
 
 router.map({
     '/order': {
         name: 'Order Fulfilment',
-        component: require('../components/OrderFulfillment.vue')
+        component: require('../components/OrderFulfillment.vue'),
+        auth: true
     },
     '/login': {
         name: 'Login In',
-        component: require('../components/auth/Login.vue')
+        component: require('../components/auth/Login.vue'),
+        auth: false
+    },
+    '/': {
+        name: 'Index',
+        component: require('../components/auth/Login.vue'),
+        auth: true
     }
+
 });
 
 router.beforeEach(function (transition) {
-    transition.to.auth = _auth2.default.checkAuth();
     if (transition.to.auth) {
-        transition.next();
-    } else {
-        transition.redirect('/');
+        if (!_auth2.default.checkAuth()) {
+            transition.redirect('/login');
+        }
     }
+
+    transition.next();
 });
 
 router.start(_App2.default, 'body');
@@ -37068,15 +37087,15 @@ exports.default = {
   },
 
   login: function login(context, creds, cb) {
+    var _this = this;
+
     creds.grant_type = 'password';
     creds.client_id = 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3';
     creds.client_secret = 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4';
 
     context.$http.post(TOKEN_URL, creds).then(function (response) {
-      console.log('fasdf');
-      console.log(response);
       localStorage.setItem('access_token', response.data.access_token);
-      this.user.authenticated = true;
+      _this.user.authenticated = true;
       cb(true);
       return;
     }, function (response) {});

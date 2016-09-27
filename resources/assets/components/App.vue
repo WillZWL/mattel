@@ -1,7 +1,7 @@
 <template>
   <div class="container body">
     <div id="app">
-      <div class="main_container" v-if="authenticated">
+      <div class="main_container" v-if="flag">
         <sidebar></sidebar>
         <navbar></navbar>
         <!-- Main content -->
@@ -18,7 +18,6 @@
         <footbar></footbar>
       </div>
       <div class="main_container" v-else>
-      ssjdsljds
         <router-view></router-view>
       </div>
     </div>
@@ -39,6 +38,7 @@ export default {
   // },
   data() {
     return {
+      flag: true,
       authenticated: auth.checkAuth()
     }
   },
