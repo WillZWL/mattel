@@ -16,31 +16,26 @@ Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('acc
 
 // Check the user's auth status when the app start
 // auth.checkAuth()
-
-var router = new VueRouter({
-  mode: 'history',
-  routes: [
-    {
-      path: '/logout',
-      beforeEnter (route, redirect) {
-        auth.logout()
-        redirect('/login')
-      }
-    }
-  ]
-});
+var router = new VueRouter();
 
 router.map({
     '/order': {
         name: 'Order Fulfilment',
         component: require('../components/OrderFulfillment.vue'),
-        auth: true
     },
     '/login': {
         name:'Login In',
         component: require('../components/auth/Login.vue'),
-        auth: false
+    },
+});
+
+router.beforeEach((transition) => {
+    transition.to.auth = auth.checkAuth();
+    if (transition.to.auth) {
+        transition.next();
+    } else {
+        transition.redirect('/');
     }
-})
+});
 
 router.start(App, 'body')

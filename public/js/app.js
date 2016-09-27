@@ -36417,16 +36417,19 @@ var _store = require('../vuex/store');
 
 var _store2 = _interopRequireDefault(_store);
 
+var _auth = require('../js/auth');
+
+var _auth2 = _interopRequireDefault(_auth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  ready: function ready() {
-    console.log(this);
-    this.$set('auth', this.$route.auth);
-  },
+  // ready() {
+  //   console.log(authenticated);
+  // },
   data: function data() {
     return {
-      auth: false
+      authenticated: _auth2.default.checkAuth()
     };
   },
 
@@ -36440,7 +36443,7 @@ exports.default = {
   replace: false
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"auth\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\">\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"authenticated\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\" v-else=\"\">\n    ssjdsljds\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -36451,7 +36454,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-1ce942a4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/store":41,"./common/Footbar.vue":31,"./common/Navbar.vue":32,"./common/Sidebar.vue":33,"./common/Titlebar.vue":34,"vue":26,"vue-hot-reload-api":23}],29:[function(require,module,exports){
+},{"../js/auth":39,"../vuex/store":41,"./common/Footbar.vue":31,"./common/Navbar.vue":32,"./common/Sidebar.vue":33,"./common/Titlebar.vue":34,"vue":26,"vue-hot-reload-api":23}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37022,29 +37025,26 @@ _vue2.default.http.headers.common['Authorization'] = 'Bearer ' + localStorage.ge
 
 // Check the user's auth status when the app start
 // auth.checkAuth()
-
-var router = new _vueRouter2.default({
-  mode: 'history',
-  routes: [{
-    path: '/logout',
-    beforeEnter: function beforeEnter(route, redirect) {
-      _auth2.default.logout();
-      redirect('/login');
-    }
-  }]
-});
+var router = new _vueRouter2.default();
 
 router.map({
-  '/order': {
-    name: 'Order Fulfilment',
-    component: require('../components/OrderFulfillment.vue'),
-    auth: true
-  },
-  '/login': {
-    name: 'Login In',
-    component: require('../components/auth/Login.vue'),
-    auth: false
-  }
+    '/order': {
+        name: 'Order Fulfilment',
+        component: require('../components/OrderFulfillment.vue')
+    },
+    '/login': {
+        name: 'Login In',
+        component: require('../components/auth/Login.vue')
+    }
+});
+
+router.beforeEach(function (transition) {
+    transition.to.auth = _auth2.default.checkAuth();
+    if (transition.to.auth) {
+        transition.next();
+    } else {
+        transition.redirect('/');
+    }
 });
 
 router.start(_App2.default, 'body');

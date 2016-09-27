@@ -1,7 +1,7 @@
 <template>
   <div class="container body">
     <div id="app">
-      <div class="main_container" v-if="auth">
+      <div class="main_container" v-if="authenticated">
         <sidebar></sidebar>
         <navbar></navbar>
         <!-- Main content -->
@@ -17,7 +17,8 @@
         <!-- /.content -->
         <footbar></footbar>
       </div>
-      <div class="main_container">
+      <div class="main_container" v-else>
+      ssjdsljds
         <router-view></router-view>
       </div>
     </div>
@@ -30,15 +31,15 @@ import Navbar from './common/Navbar.vue';
 import Sidebar from './common/Sidebar.vue';
 import Footbar from './common/Footbar.vue';
 import store from '../vuex/store';
+import auth from '../js/auth'
 
 export default {
-  ready() {
-    console.log(this);
-    this.$set('auth', this.$route.auth)
-  },
+  // ready() {
+  //   console.log(authenticated);
+  // },
   data() {
     return {
-      auth:false
+      authenticated: auth.checkAuth()
     }
   },
   components: {
