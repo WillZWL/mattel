@@ -24,13 +24,13 @@
             </ul>
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new">
-                <order-list :id="'table_content1'" :items='items'></order-list>
+                <order-list :id="'table_content1'" :orders='orders'></order-list>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready">
-                <order-list :id="'table_content2'" :items='items'></order-list>
+                <order-list :id="'table_content2'" :orders='orders'></order-list>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="shipped">
-                <order-list :id="'table_content4'" :items='items'></order-list>
+                <order-list :id="'table_content4'" :orders='orders'></order-list>
               </div>
             </div>
           </div>
@@ -49,180 +49,11 @@
     },
     data() {
       return {
-        items: [
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667766',
-            esg_so_no:'543634',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_my',
-            price:'1000.00',
-            order_qty:5,
-            inventory: 3
-          },
-          {
-            platform_type:'Accelerator',
-            biz_type:'Lazada',
-            merchant:'MATTEL',
-            platform_id:'AC-BCLZ-ETRPH',
-            lazada_so_no:'4499667755',
-            esg_so_no:'543666',
-            order_create_date:'2016-09-15 00:00:38',
-            update_date:'2016-09-15 00:00:42',
-            payment_method:'bc_lazada_ph',
-            price:'6000.00',
-            order_qty:6,
-            inventory: 15
-          }
-        ]
+        orders: []
       }
     },
     ready() {
-
+      this.changeOrderStatus('new')
     },
     methods: {
       init() {
@@ -230,12 +61,12 @@
       },
       changeOrderStatus: function(status) {
         $.isLoading({ text: "Loading  "+ status + " orders", class:"fa fa-refresh fa-spin" });
-        // this.$http({
-        //   url:this.api_url+'order_fulfillment'
-        //   method: 'GET'
-        // }).then(function (response) {
-        //   this.$set('items', response.data.data);
-        // });
+        this.$http({
+          url:'http://admincentre.eservicesgroup.com:7890/api/getOrders?status='+status,
+          method: 'get'
+        }).then(function (response) {
+          this.$set('orders', response.data.data);
+        });
         setTimeout( function(){
           $.isLoading("hide");
         }, 1000)

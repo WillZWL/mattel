@@ -43,13 +43,14 @@ import store from '../vuex/store';
 import auth from '../js/auth'
 
 export default {
-  ready() {
-    console.log(this);
+  created() {
+    if (localStorage.access_token) {
+      this.$set('authenticated', true)
+    }
   },
   data() {
     return {
-      flag: true,
-      authenticated: this.authenticated
+      authenticated: false
     }
   },
   components: {

@@ -25,34 +25,36 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in items">
+      <tr v-for="order in orders">
         <td class="a-center td_checkbox">
           <input type="checkbox" class="flat" name="id" value="">
         </td>
-        <td>{{item.biz_type}}</td>
-        <td>{{item.merchant}}</td>
+        <td>{{order.biz_type}}</td>
+        <td>{{order.merchant}}</td>
         <td>
           <a data-toggle="modal" data-target=".overview{{$index}}-{{id}}">
-            {{item.lazada_so_no}}&nbsp;&nbsp;<i class="fa fa-search-plus"></i>
+            {{order.platform_order_id}}&nbsp;&nbsp;<i class="fa fa-search-plus"></i>
           </a>
           <div class="modal fade overview{{$index}}-{{id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
             <!-- detail overview-->
             <order-detail :index="$index"></order-detail>
           </div>
         </td>
-        <td>{{item.order_create_date}}</td>
-        <td>{{item.update_date}}</td>
-        <td>{{item.payment_method}}</td>
-        <td>{{item.order_qty}}</td>
-        <td>{{item.inventory}}</td>
+        <td>{{order.order_create_date}}</td>
+        <td>{{order.update_date}}</td>
+        <td>{{order.payment_method}}</td>
+        <td>
+          <p v-for="(sku, qty) in order.items">{{sku}} Qty:{{qty}}</p>
+        </td>
+        <td>{{order.inventory}}</td>
         <td v-if="id != 'table_content4'">
           <template v-if="id == 'table_content1'">
-            <button v-if="item.inventory > item.order_qty" type="button" class="btn btn-sm btn-primary">
+            <button v-if="order.inventory > order.order_qty" type="button" class="btn btn-sm btn-primary">
                     Ready To Ship</button> &nbsp;&nbsp;
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
           </template>
-          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(item.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
+          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(order.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
       </tr>
     </tbody>
@@ -83,7 +85,7 @@
     },
     props: [
       'id',
-      'items'
+      'orders'
     ],
     ready() {
       this.init()
