@@ -1,6 +1,6 @@
 import {router} from './app'
 
-const API_URL = 'http://vanguard.sites.dev/api/'
+const API_URL = 'http://vanguard.sites.dev/'
 const TOKEN_URL = API_URL + 'oauth/access_token'
 
 export default {

@@ -21,27 +21,30 @@
                   <li role="presentation" class="active">
                     <a href="#tab_content1" role="tab" id="new"
                        data-toggle="tab" aria-expanded="true"
-                       v-on:click="changeOrderStatus('new')">New</a>
+                       v-on:click="switchOrderStatusTab('new')">New</a>
                   </li>
                   <li role="presentation" class="">
                     <a href="#tab_content2" role="tab" id="ready"
                       data-toggle="tab" aria-expanded="false"
-                      v-on:click="changeOrderStatus('ready')">Ready To Ship</a>
+                      v-on:click="switchOrderStatusTab('ready')">Ready To Ship</a>
                   </li>
                   <li role="presentation" class="">
                     <a href="#tab_content3" role="tab" id="shipped"
                     data-toggle="tab" aria-expanded="false"
-                    v-on:click="changeOrderStatus('shipped')">Shipped</a>
+                    v-on:click="switchOrderStatusTab('shipped')">Shipped</a>
                   </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new" v-if="status == 'new'">
+                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new"
+                    v-if="status == 'new'">
                     <order-list :id="'table_content1'" :orders='orders'></order-list>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready" v-if="status == 'ready'">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="ready"
+                    v-if="status == 'ready'">
                     <order-list :id="'table_content2'" :orders='orders'></order-list>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="shipped" v-if="status == 'shipped'">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="shipped"
+                    v-if="status == 'shipped'">
                     <order-list :id="'table_content3'" :orders='orders'></order-list>
                   </div>
                 </div>
@@ -67,7 +70,19 @@
   import Sidebar from './common/Sidebar.vue';
   import Footbar from './common/Footbar.vue';
 
+  import { switchOrderStatusTab } from '../vuex/actions';
+  import { getTabStatus, getOrderLists } from '../vuex/getters';
+
   export default {
+    vuex: {
+      actions: {
+        switchOrderStatusTab
+      },
+      getters: {
+        status: getTabStatus,
+        orders: getOrderLists,
+      }
+    },
     components: {
       OrderList,
       OrderFilters,
@@ -77,88 +92,10 @@
       Footbar
     },
     data() {
-      return {
-        orders: [],
-        status: 'new'
-      }
+      return {}
     },
     ready() {
-      this.changeOrderStatus('new')
-    },
-    methods: {
-      init() {
-
-      },
-      changeOrderStatus: function(status) {
-        $.isLoading({ text: "Loading  "+ status + " orders", class:"fa fa-refresh fa-spin" });
-        this.$http({
-          url:'http://vanguard.sites.dev/api/getOrders?status='+status,
-          method: 'get'
-        }).then(function (response) {
-          this.$set('orders', response.data.data);
-        }).then(function(){
-          if ($("input.flat")[0]) {
-            $('input.flat').iCheck({
-              checkboxClass: 'icheckbox_flat-green'
-            });
-          }
-          // Table
-          $('table input').on('ifChecked', function () {
-              checkState = '';
-              $(this).parent().parent().parent().addClass('selected');
-              countChecked();
-          });
-          $('table input').on('ifUnchecked', function () {
-              checkState = '';
-              $(this).parent().parent().parent().removeClass('selected');
-              countChecked();
-          });
-
-          var checkState = '';
-          $('.bulk_action input').on('ifChecked', function () {
-              checkState = '';
-              $(this).parent().parent().parent().addClass('selected');
-              countChecked();
-          });
-
-          $('.bulk_action input').on('ifUnchecked', function () {
-              checkState = '';
-              $(this).parent().parent().parent().removeClass('selected');
-              countChecked();
-          });
-
-          $('.bulk_action input#check-all').on('ifChecked', function () {
-              checkState = 'all';
-              countChecked();
-          });
-
-          $('.bulk_action input#check-all').on('ifUnchecked', function () {
-              checkState = 'none';
-              countChecked();
-          });
-
-          function countChecked() {
-              if (checkState === 'all') {
-                  $(".bulk_action input[name='id']").iCheck('check');
-              }
-              if (checkState === 'none') {
-                  $(".bulk_action input[name='id']").iCheck('uncheck');
-              }
-
-              var checkCount = $(".bulk_action input[name='id']:checked").length;
-              if (checkCount) {
-                  $('.column-title').hide();
-                  $('.bulk-actions').show();
-              } else {
-                  $('.column-title').show();
-                  $('.bulk-actions').hide();
-              }
-          }
-        });
-        setTimeout( function(){
-          $.isLoading("hide");
-        }, 1000)
-      }
+      this.switchOrderStatusTab('new')
     }
   }
 </script>

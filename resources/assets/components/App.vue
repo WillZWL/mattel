@@ -13,8 +13,9 @@
 <script>
 
 import auth from '../js/auth'
-
+import store from '../vuex/store';
 export default {
+  store,
   replace: false
 }
 </script>

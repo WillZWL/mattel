@@ -13,15 +13,7 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <template v-if="id == 'table_content1'">
-          <th v-for="header in new_headers">{{header}}</th>
-        </template>
-        <template v-if="id == 'table_content2'">
-          <th v-for="header in ready_headers">{{header}}</th>
-        </template>
-        <template v-if="id == 'table_content3'">
-          <th v-for="header in shipped_headers">{{header}}</th>
-        </template>
+          <th v-for="header in headers">{{header}}</th>
       </tr>
     </thead>
     <tbody>
@@ -60,13 +52,13 @@
     </tbody>
   </table>
   <div v-if="id != 'table_content3'" class="x_content">
-    <button v-if="id == 'table_content1'" type="button" class="btn btn-default"
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="printPickingList()"><i class="fa fa-print"></i>  Picking List</button>
-    <button v-if="id == 'table_content1'" type="button" class="btn btn-default" data-toggle="tooltip"
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default" data-toggle="tooltip"
             data-placement="bottom" title="For selected orders"
             v-on:click="printInvoice()"><i class="fa fa-print"></i>  Invoice</button>
-    <button v-if="id == 'table_content1'" type="button" class="btn btn-default"
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="printAWBLable()"><i class="fa fa-print"></i>  AWB label</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
@@ -74,7 +66,7 @@
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
               data-toggle="tooltip" data-placement="bottom" title="For selected orders"
-            v-on:click="readyToShip()"
+            v-on:click="setReadyToShip()"
             >Ready To Ship</button>
     <button v-if="id == 'table_content2'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
@@ -82,13 +74,39 @@
             Scan Tracking No.</button>
     <button v-if="id != 'table_content3'" type="button" class="btn btn-danger"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
-            v-on:click="cancel()">
-            <i class="fa fa-trash-o"></i>  Cancel</button>
+            v-on:click="cancelOrder()">
+            <i class="fa fa-trash-o"></i> Cancel</button>
   </div>
 </template>
 <script>
   import OrderDetail from './OrderDetail.vue'
+  import {
+      checkboxHelper,
+      setReadyToShip,
+      cancelOrder,
+      printPickingList,
+      printInvoice,
+      printAWBLable,
+      scanTrackingNo,
+    } from '../../vuex/actions';
+
+  import { getTableHeaders } from '../../vuex/getters';
+
   export default {
+    vuex: {
+      actions: {
+        checkboxHelper,
+        setReadyToShip,
+        cancelOrder,
+        printPickingList,
+        printInvoice,
+        printAWBLable,
+        scanTrackingNo
+      },
+      getters: {
+        headers: getTableHeaders
+      }
+    },
     components: {
       OrderDetail
     },
@@ -97,102 +115,15 @@
       'orders'
     ],
     ready() {
-      this.init()
+      this.checkboxHelper()
     },
     data() {
-      return {
-        new_headers: [
-          'BizType',
-          'Merchant',
-          'Platform Order No',
-          'Order Date',
-          'Updated Date',
-          'Payment Method',
-          'Item QTY',
-          'Inventory',
-          'Action'
-        ],
-        ready_headers: [
-          'BizType',
-          'Merchant',
-          'Platform Order No',
-          'Order Date',
-          'Updated Date',
-          'Payment Method',
-          'Item QTY',
-          'Inventory',
-          'Action'
-        ],
-        shipped_headers: [
-          'BizType',
-          'Merchant',
-          'Platform Order No',
-          'Order Date',
-          'Updated Date',
-          'Payment Method',
-          'Item QTY',
-          'Inventory'
-        ]
-      }
+      return {}
     },
     methods: {
-      init() {
-
-      },
-      printPickingList: function() {
-        var orders =  $('input:checkbox[name=id]:checked');
-        if (orders.length === 0) {
-           $.isLoading({ text: "Please Select order First", class:"fa fa-refresh fa-spin"});
-           setTimeout( function(){
-            $.isLoading("hide");
-          }, 500)
-        };
-        var post_ids = [];
-        $.each(orders, function() {
-          post_ids.push(this.value);
-        });
-        console.log(post_ids);
-        this.$http.post(
-          'http://vanguard.dev/api/merchant-api/order-picking-list',
-          {
-            id: post_ids
-          }
-          ).then(function (response) {
-
-        });
-      },
-      printInvoice: function(orders =[]) {
-
-      },
-      printAWBLable: function(orders = []) {
-
-      },
-
       allocateOrders: function(orders = [])
       {
         $.isLoading({ text: "All order with available stock moving to Ready to Ship", class:"fa fa-refresh fa-spin" });
-        setTimeout( function(){
-          $.isLoading("hide");
-        }, 2000)
-      },
-      readyToShip: function(orders = [])
-      {
-        $.isLoading({ text: "Setting Ready To Ship", class:"fa fa-refresh fa-spin" });
-        setTimeout( function(){
-          $.isLoading("hide");
-        }, 2000)
-      },
-      cancel: function(orders = [])
-      {
-        $.isLoading({ text: "Canceling", class:"fa fa-refresh fa-spin" });
-        setTimeout( function(){
-          $.isLoading("hide");
-        }, 2000)
-      },
-      scanTrackingNo: function(orders = [])
-      {
-        var tracking_no = $(".tracking-no-"+orders).val();
-        $.isLoading({ text:"Shipped", class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
