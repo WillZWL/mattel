@@ -44405,12 +44405,12 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-1ce942a4", module.exports)
+    hotAPI.createRecord("_v-63a31e8f", module.exports)
   } else {
-    hotAPI.update("_v-1ce942a4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-63a31e8f", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/store":45,"./common/Footbar.vue":35,"./common/Navbar.vue":36,"./common/Sidebar.vue":37,"./common/Titlebar.vue":38,"vue":30,"vue-hot-reload-api":27}],33:[function(require,module,exports){
+},{"../vuex/store":46,"./common/Footbar.vue":35,"./common/Navbar.vue":36,"./common/Sidebar.vue":37,"./common/Titlebar.vue":38,"vue":30,"vue-hot-reload-api":27}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44613,18 +44613,20 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"row\">\n  <order-filters></order-filters>\n  <div class=\"col-md-12 col-sm-12 col-xs-12\">\n    <div class=\"x_panel\">\n      <div class=\"x_content\">\n        <div class=\"\" role=\"tabpanel\" data-example-id=\"togglable-tabs\">\n          <ul id=\"myTab\" class=\"nav nav-tabs bar_tabs\" role=\"tablist\">\n            <li role=\"presentation\" class=\"active\">\n              <a href=\"#tab_content1\" role=\"tab\" id=\"new\" data-toggle=\"tab\" aria-expanded=\"true\" v-on:click=\"changeOrderStatus('new')\">New</a>\n            </li>\n            <li role=\"presentation\" class=\"\">\n              <a href=\"#tab_content2\" role=\"tab\" id=\"ready\" data-toggle=\"tab\" aria-expanded=\"false\" v-on:click=\"changeOrderStatus('ready')\">Ready To Ship</a>\n            </li>\n            <!-- <li role=\"presentation\" class=\"\">\n              <a href=\"#tab_content3\" role=\"tab\" id=\"in-transit\"\n              data-toggle=\"tab\" aria-expanded=\"false\"\n              v-on:click=\"changeOrderStatus('in-transit')\">In Transit</a>\n            </li>\n            -->\n            <li role=\"presentation\" class=\"\">\n              <a href=\"#tab_content4\" role=\"tab\" id=\"shipped\" data-toggle=\"tab\" aria-expanded=\"false\" v-on:click=\"changeOrderStatus('shipped')\">Shipped</a>\n            </li>\n          </ul>\n          <div id=\"myTabContent\" class=\"tab-content\">\n            <div role=\"tabpanel\" class=\"tab-pane fade active in\" id=\"tab_content1\" aria-labelledby=\"new\">\n              <order-list :id=\"'table_content1'\" :items=\"items\"></order-list>\n            </div>\n            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"tab_content2\" aria-labelledby=\"ready\">\n              <order-list :id=\"'table_content2'\" :items=\"items\"></order-list>\n            </div>\n            <!-- <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"tab_content3\" aria-labelledby=\"in-transit\">\n              <order-list :id=\"'table_content3'\" :items='items'></order-list>\n            </div>\n            -->\n            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"tab_content4\" aria-labelledby=\"shipped\">\n              <order-list :id=\"'table_content4'\" :items=\"items\"></order-list>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"row\">\n  <order-filters></order-filters>\n  <div class=\"col-md-12 col-sm-12 col-xs-12\">\n    <div class=\"x_panel\">\n      <div class=\"x_content\">\n        <div class=\"\" role=\"tabpanel\" data-example-id=\"togglable-tabs\">\n          <ul id=\"myTab\" class=\"nav nav-tabs bar_tabs\" role=\"tablist\">\n            <li role=\"presentation\" class=\"active\">\n              <a href=\"#tab_content1\" role=\"tab\" id=\"new\" data-toggle=\"tab\" aria-expanded=\"true\" v-on:click=\"changeOrderStatus('new')\">New</a>\n            </li>\n            <li role=\"presentation\" class=\"\">\n              <a href=\"#tab_content2\" role=\"tab\" id=\"ready\" data-toggle=\"tab\" aria-expanded=\"false\" v-on:click=\"changeOrderStatus('ready')\">Ready To Ship</a>\n            </li>\n            <li role=\"presentation\" class=\"\">\n              <a href=\"#tab_content4\" role=\"tab\" id=\"shipped\" data-toggle=\"tab\" aria-expanded=\"false\" v-on:click=\"changeOrderStatus('shipped')\">Shipped</a>\n            </li>\n          </ul>\n          <div id=\"myTabContent\" class=\"tab-content\">\n            <div role=\"tabpanel\" class=\"tab-pane fade active in\" id=\"tab_content1\" aria-labelledby=\"new\">\n              <order-list :id=\"'table_content1'\" :items=\"items\"></order-list>\n            </div>\n            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"tab_content2\" aria-labelledby=\"ready\">\n              <order-list :id=\"'table_content2'\" :items=\"items\"></order-list>\n            </div>\n            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"tab_content4\" aria-labelledby=\"shipped\">\n              <order-list :id=\"'table_content4'\" :items=\"items\"></order-list>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-7b84c7bd", module.exports)
+    hotAPI.createRecord("_v-89023c9c", module.exports)
   } else {
-    hotAPI.update("_v-7b84c7bd", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-89023c9c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./orderFulfillment/OrderFilters.vue":40,"./orderFulfillment/OrderList.vue":41,"vue":30,"vue-hot-reload-api":27}],34:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\n.error {\n  color: red;\n}\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44648,42 +44650,51 @@ exports.default = {
     };
   },
 
-
   methods: {
-    submit: function submit() {
+    login: function login() {
+      var _this = this;
 
       var credentials = {
         username: this.credentials.username,
         password: this.credentials.password
       };
 
-      _auth2.default.login(this, credentials, 'secretquote');
+      _auth2.default.login(this, credentials, function (loggedIn) {
+        if (!loggedIn) {
+          _this.error = true;
+        } else {
+          _this.$router.replace(_this.$route.query.redirect || '/dashboard');
+        }
+      });
     }
   }
-
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-8 col-md-offset-2\">\n            <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">Login</div>\n                <div class=\"panel-body\">\n                    <form class=\"form-horizontal\" role=\"form\" method=\"POST\" action=\"{{ url('/login') }}\">\n                        {{ csrf_field() }}\n\n                        <div class=\"form-group{{ $errors->has('email') ? ' has-error' : '' }}\">\n                            <label for=\"email\" class=\"col-md-4 control-label\">E-Mail Address</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"email\" type=\"email\" class=\"form-control\" name=\"email\" value=\"{{ old('email') }}\" required=\"\" autofocus=\"\">\n\n                                @if ($errors-&gt;has('email'))\n                                    <span class=\"help-block\">\n                                        <strong>{{ $errors-&gt;first('email') }}</strong>\n                                    </span>\n                                @endif\n                            </div>\n                        </div>\n\n                        <div class=\"form-group{{ $errors->has('password') ? ' has-error' : '' }}\">\n                            <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password\" type=\"password\" class=\"form-control\" name=\"password\" required=\"\">\n\n                                @if ($errors-&gt;has('password'))\n                                    <span class=\"help-block\">\n                                        <strong>{{ $errors-&gt;first('password') }}</strong>\n                                    </span>\n                                @endif\n                            </div>\n                        </div>\n\n                        <div class=\"form-group\">\n                            <div class=\"col-md-6 col-md-offset-4\">\n                                <div class=\"checkbox\">\n                                    <label>\n                                        <input type=\"checkbox\" name=\"remember\"> Remember Me\n                                    </label>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group\">\n                            <div class=\"col-md-8 col-md-offset-4\">\n                                <button type=\"submit\" class=\"btn btn-primary\">\n                                    Login\n                                </button>\n\n                                <a class=\"btn btn-link\" href=\"{{ url('/password/reset') }}\">\n                                    Forgot Your Password?\n                                </a>\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n  <div class=\"col-sm-4 col-sm-offset-4\">\n    <h2>Log In</h2>\n    <p>Log in to your account to get some great quotes.</p>\n    <div class=\"alert alert-danger\" v-if=\"error\">\n      <p>{{ error }}</p>\n    </div>\n    <div class=\"form-group\">\n      <input type=\"text\" class=\"form-control\" placeholder=\"Enter your username\" v-model=\"credentials.username\">\n    </div>\n    <div class=\"form-group\">\n      <input type=\"password\" class=\"form-control\" placeholder=\"Enter your password\" v-model=\"credentials.password\">\n    </div>\n    <button class=\"btn btn-primary\" @click=\"submit()\">Access</button>\n  </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\">\n  <div class=\"row\">\n      <div class=\"col-md-8 col-md-offset-2\">\n          <div class=\"panel panel-default\">\n              <div class=\"panel-heading\">Login</div>\n              <div class=\"panel-body\">\n                  <form @submit.prevent=\"login\" class=\"form-horizontal\" role=\"form\">\n\n                      <div class=\"form-group\">\n                          <label for=\"email\" class=\"col-md-4 control-label\">E-Mail Address</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"email\" v-model=\"credentials.username\" type=\"email\" class=\"form-control\" name=\"email\" value=\"\" required=\"\" autofocus=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"password\" v-model=\"credentials.password\" type=\"password\" class=\"form-control\" name=\"password\" required=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <div class=\"col-md-8 col-md-offset-4\">\n                              <button type=\"submit\" class=\"btn btn-primary\"> Login </button>\n                          </div>\n                      </div>\n                  </form>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\n.error {\n  color: red;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-2513bccf", module.exports)
+    hotAPI.createRecord("_v-ed5c9af8", module.exports)
   } else {
-    hotAPI.update("_v-2513bccf", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-ed5c9af8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../../js/auth":43,"vue":30,"vue-hot-reload-api":27}],35:[function(require,module,exports){
+},{"../../js/auth":43,"vue":30,"vue-hot-reload-api":27,"vueify/lib/insert-css":31}],35:[function(require,module,exports){
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<!-- footer content -->\n<footer>\n\t<div class=\"pull-right\">Accelerator System  <a href=\"#\"> Power By www.eservicesgroup.com</a></div>\n  <div class=\"clearfix\"></div>\n</footer>\n<!-- /footer content -->\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-7ce3e34e", module.exports)
+    hotAPI.createRecord("_v-0115f683", module.exports)
   } else {
-    hotAPI.update("_v-7ce3e34e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-0115f683", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27}],36:[function(require,module,exports){
@@ -44693,9 +44704,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-6c9c0392", module.exports)
+    hotAPI.createRecord("_v-10063062", module.exports)
   } else {
-    hotAPI.update("_v-6c9c0392", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-10063062", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27}],37:[function(require,module,exports){
@@ -44782,9 +44793,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-44b42b76", module.exports)
+    hotAPI.createRecord("_v-61d7fd7a", module.exports)
   } else {
-    hotAPI.update("_v-44b42b76", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-61d7fd7a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27}],38:[function(require,module,exports){
@@ -44794,9 +44805,9 @@ if (module.hot) {(function () {  module.hot.accept()
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-f737f0bc", module.exports)
+    hotAPI.createRecord("_v-f31749e6", module.exports)
   } else {
-    hotAPI.update("_v-f737f0bc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-f31749e6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27}],39:[function(require,module,exports){
@@ -44821,9 +44832,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-794849ad", module.exports)
+    hotAPI.createRecord("_v-bd6bc7bc", module.exports)
   } else {
-    hotAPI.update("_v-794849ad", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-bd6bc7bc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27,"vueify/lib/insert-css":31}],40:[function(require,module,exports){
@@ -44852,9 +44863,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-0eda8b62", module.exports)
+    hotAPI.createRecord("_v-5e69930c", module.exports)
   } else {
-    hotAPI.update("_v-0eda8b62", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-5e69930c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":27,"vueify/lib/insert-css":31}],41:[function(require,module,exports){
@@ -44929,9 +44940,9 @@ if (module.hot) {(function () {  module.hot.accept()
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
-    hotAPI.createRecord("_v-4b44f47a", module.exports)
+    hotAPI.createRecord("_v-2f12e02f", module.exports)
   } else {
-    hotAPI.update("_v-4b44f47a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+    hotAPI.update("_v-2f12e02f", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"./OrderDetail.vue":39,"vue":30,"vue-hot-reload-api":27,"vueify/lib/insert-css":31}],42:[function(require,module,exports){
@@ -44971,21 +44982,83 @@ _vue2.default.http.headers.common['Authorization'] = 'Bearer ' + localStorage.ge
 // Check the user's auth status when the app start
 // auth.checkAuth()
 
-var router = new _vueRouter2.default();
+var router = new _vueRouter2.default({
+  mode: 'history',
+  routes: [{
+    path: '/logout',
+    beforeEnter: function beforeEnter(route, redirect) {
+      _auth2.default.logout();
+      redirect('/login');
+    }
+  }]
+});
 
 router.map({
-    '/order': {
-        name: 'Order Fulfilment',
-        component: require('../components/OrderFulfillment.vue')
-    },
-    '/login': {
-        component: require('../components/auth/Login.vue')
-    }
+  '/order': {
+    name: 'Order Fulfilment',
+    component: require('../components/OrderFulfillment.vue')
+  },
+  '/login': {
+    component: require('../components/auth/Login.vue')
+  }
 });
 
 router.start(_App2.default, 'body');
 
-},{"../components/App.vue":32,"../components/OrderFulfillment.vue":33,"../components/auth/Login.vue":34,"./auth":43,"./boot":44,"vue":30,"vue-resource":28,"vue-router":29}],43:[function(require,module,exports){
+},{"../components/App.vue":32,"../components/OrderFulfillment.vue":33,"../components/auth/Login.vue":34,"./auth":44,"./boot":45,"vue":30,"vue-resource":28,"vue-router":29}],43:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _app = require('./app');
+
+var API_URL = 'http://vanguard.sites.dev/';
+var TOKEN_URL = API_URL + 'oauth/access_token';
+
+exports.default = {
+
+  user: {
+    authenticated: false
+  },
+
+  login: function login(context, creds, cb) {
+    creds.grant_type = 'password';
+    creds.client_id = 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3';
+    creds.client_secret = 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4';
+
+    context.$http.post(TOKEN_URL, creds).then(function (response) {
+      console.log('fasdf');
+      console.log(response);
+      localStorage.setItem('access_token', response.body.access_token);
+      this.user.authenticated = true;
+      cb(true);
+      return;
+    }, function (response) {});
+  },
+  logout: function logout() {
+    localStorage.removeItem('access_token');
+    this.user.authenticated = false;
+  },
+  checkAuth: function checkAuth() {
+    var jwt = localStorage.getItem('access_token');
+    if (jwt) {
+      this.user.authenticated = true;
+    } else {
+      this.user.authenticated = false;
+    }
+
+    return this.user.authenticated;
+  },
+  getAuthHeader: function getAuthHeader() {
+    return {
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    };
+  }
+};
+
+},{"./app":42}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44995,8 +45068,7 @@ Object.defineProperty(exports, "__esModule", {
 var _app = require('../app');
 
 var API_URL = 'http://vanguard.sites.dev/';
-var LOGIN_URL = API_URL + 'login/';
-var SIGNUP_URL = API_URL + 'register/';
+var TOKEN_URL = API_URL + 'oauth/access_token';
 
 exports.default = {
 
@@ -45004,56 +45076,42 @@ exports.default = {
     authenticated: false
   },
 
-  login: function login(context, creds, redirect) {
-    var _this = this;
+  login: function login(context, creds, cb) {
+    creds.grant_type = 'password';
+    creds.client_id = 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3';
+    creds.client_secret = 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4';
 
-    context.$http.post(LOGIN_URL, creds, function (data) {
-      localStorage.setItem('id_token', data.id_token);
-
-      _this.user.authenticated = true;
-
-      if (redirect) {
-        _app.router.go(redirect);
-      }
-    }).error(function (err) {
-      context.error = err;
-    });
-  },
-  signup: function signup(context, creds, redirect) {
-    var _this2 = this;
-
-    context.$http.post(SIGNUP_URL, creds, function (data) {
-      localStorage.setItem('id_token', data.id_token);
-
-      _this2.user.authenticated = true;
-
-      if (redirect) {
-        _app.router.go(redirect);
-      }
-    }).error(function (err) {
-      context.error = err;
-    });
+    context.$http.post(TOKEN_URL, creds).then(function (response) {
+      console.log('fasdf');
+      console.log(response);
+      localStorage.setItem('access_token', response.body.access_token);
+      this.user.authenticated = true;
+      cb(true);
+      return;
+    }, function (response) {});
   },
   logout: function logout() {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem('access_token');
     this.user.authenticated = false;
   },
   checkAuth: function checkAuth() {
-    var jwt = localStorage.getItem('id_token');
+    var jwt = localStorage.getItem('access_token');
     if (jwt) {
       this.user.authenticated = true;
     } else {
       this.user.authenticated = false;
     }
+
+    return this.user.authenticated;
   },
   getAuthHeader: function getAuthHeader() {
     return {
-      'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     };
   }
 };
 
-},{"../app":42}],44:[function(require,module,exports){
+},{"../app":42}],45:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -45068,7 +45126,7 @@ require('jquery-ui');
 require('js-url');
 require('select2');
 
-},{"blueimp-file-upload":1,"bootstrap":4,"bootstrap-daterangepicker":3,"es6-promise":17,"fastclick":18,"install":19,"is-loading":20,"jquery":22,"jquery-ui":21,"js-url":23,"select2":26}],45:[function(require,module,exports){
+},{"blueimp-file-upload":1,"bootstrap":4,"bootstrap-daterangepicker":3,"es6-promise":17,"fastclick":18,"install":19,"is-loading":20,"jquery":22,"jquery-ui":21,"js-url":23,"select2":26}],46:[function(require,module,exports){
 "use strict";
 
 },{}]},{},[42]);
