@@ -36444,7 +36444,7 @@ exports.default = {
   replace: false
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"flag\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\" v-else=\"\">\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n  <div id=\"app\">\n    <div class=\"main_container\" v-if=\"authenticated\">\n      <sidebar></sidebar>\n      <navbar></navbar>\n      <!-- Main content -->\n      <div class=\"right_col\" role=\"main\">\n        <section class=\"content\">\n          <!-- Page Title -->\n          <titlebar></titlebar>\n          <!-- Your Page Content Here -->\n          <!-- route outlet -->\n          <router-view></router-view>\n        </section>\n      </div>\n      <!-- /.content -->\n      <footbar></footbar>\n    </div>\n    <div class=\"main_container\" v-else=\"\">\n      <router-view></router-view>\n    </div>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -36691,7 +36691,8 @@ exports.default = {
         username: '',
         password: ''
       },
-      error: ''
+      error: '',
+      authenticated: _auth2.default.checkAuth()
     };
   },
 
@@ -36715,7 +36716,7 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\">\n  <div class=\"row\">\n      <div class=\"col-md-8 col-md-offset-2\">\n          <div class=\"panel panel-default\">\n              <div class=\"panel-heading\">Login</div>\n              <div class=\"panel-body\">\n                  <form @submit.prevent=\"login\" class=\"form-horizontal\" role=\"form\">\n\n                      <div class=\"form-group\">\n                          <label for=\"email\" class=\"col-md-4 control-label\">E-Mail Address</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"email\" v-model=\"credentials.username\" type=\"email\" class=\"form-control\" name=\"email\" value=\"\" required=\"\" autofocus=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"password\" v-model=\"credentials.password\" type=\"password\" class=\"form-control\" name=\"password\" required=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <div class=\"col-md-8 col-md-offset-4\">\n                              <button type=\"submit\" class=\"btn btn-primary\"> Login </button>\n                          </div>\n                      </div>\n                  </form>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\" v-if=\"!authenticated\">\n  <div class=\"row\">\n      <div class=\"col-md-8 col-md-offset-2\">\n          <div class=\"panel panel-default\">\n              <div class=\"panel-heading\">Login</div>\n              <div class=\"panel-body\">\n                  <form @submit.prevent=\"login\" class=\"form-horizontal\" role=\"form\">\n\n                      <div class=\"form-group\">\n                          <label for=\"email\" class=\"col-md-4 control-label\">E-Mail Address</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"email\" v-model=\"credentials.username\" type=\"email\" class=\"form-control\" name=\"email\" value=\"\" required=\"\" autofocus=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <label for=\"password\" class=\"col-md-4 control-label\">Password</label>\n\n                          <div class=\"col-md-6\">\n                              <input id=\"password\" v-model=\"credentials.password\" type=\"password\" class=\"form-control\" name=\"password\" required=\"\">\n                          </div>\n                      </div>\n\n                      <div class=\"form-group\">\n                          <div class=\"col-md-8 col-md-offset-4\">\n                              <button type=\"submit\" class=\"btn btn-primary\"> Login </button>\n                          </div>\n                      </div>\n                  </form>\n              </div>\n          </div>\n      </div>\n  </div>\n</div>\n<div v-else=\"\">\n  logged\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -37049,11 +37050,10 @@ router.map({
         auth: false
     },
     '/': {
-        name: 'Index',
-        component: require('../components/auth/Login.vue'),
+        name: 'Home',
+        component: require('../components/OrderFulfillment.vue'),
         auth: true
     }
-
 });
 
 router.beforeEach(function (transition) {
@@ -37061,6 +37061,8 @@ router.beforeEach(function (transition) {
         if (!_auth2.default.checkAuth()) {
             transition.redirect('/login');
         }
+    } else if (transition.to.path == '/login' && _auth2.default.checkAuth()) {
+        transition.redirect('/');
     }
 
     transition.next();

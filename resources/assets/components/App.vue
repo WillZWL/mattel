@@ -1,7 +1,7 @@
 <template>
   <div class="container body">
     <div id="app">
-      <div class="main_container" v-if="flag">
+      <div class="main_container" v-if="authenticated">
         <sidebar></sidebar>
         <navbar></navbar>
         <!-- Main content -->

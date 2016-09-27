@@ -40,11 +40,10 @@ router.map({
         auth: false
     },
     '/': {
-        name:'Index',
-        component: require('../components/auth/Login.vue'),
+        name:'Home',
+        component: require('../components/OrderFulfillment.vue'),
         auth: true
-    },
-
+    }
 });
 
 router.beforeEach((transition) => {
@@ -52,6 +51,8 @@ router.beforeEach((transition) => {
         if (!auth.checkAuth()) {
           transition.redirect('/login')
         }
+    } else if (transition.to.path == '/login' && auth.checkAuth()) {
+      transition.redirect('/')
     }
 
     transition.next()
