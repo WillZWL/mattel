@@ -25,15 +25,6 @@
                 Items List
               </a>
             </li>
-           <!--  <li role="presentation" class="">
-              <a href="#order-detail-{{index}}-tab3" role="tab" id="item-history-tab" data-toggle="tab" aria-expanded="false">
-                Items History
-              </a>
-            <li role="presentation" class="">
-              <a href="#order-detail-{{index}}-tab4" role="tab" id="components-tab" data-toggle="tab" aria-expanded="false">
-                Comments
-              </a>
-            </li> -->
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="order-detail-{{index}}-tab1" aria-labelledby="customer-info-tab">
@@ -65,7 +56,6 @@
                 <tbody>
                   <tr>
                     <td>58009133</td>
-                    <!-- <td>16567-AA-NA</td> -->
                     <td>FR43890934BHK</td>
                     <td>Iphone 7 plus ()</td>
                     <td>DropShipping</td>
@@ -75,7 +65,6 @@
                   </tr>
                   <tr>
                     <td>58009133</td>
-                    <!-- <td>16567-AA-NA</td> -->
                     <td>FR43890934BHK</td>
                     <td>Iphone 7 plus ()</td>
                     <td>DropShipping</td>

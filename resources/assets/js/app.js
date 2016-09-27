@@ -15,16 +15,7 @@ Vue.use(VueResource)
 
 var router = new VueRouter();
 
-// function requireAuth (route, redirect, next) {
-//   if (!auth.checkAuth()) {
-//     redirect({
-//       path: '/login',
-//       query: { redirect: route.fullPath }
-//     })
-//   } else {
-//     next()
-//   }
-// }
+Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.access_token;
 
 var router = new VueRouter();
 
