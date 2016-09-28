@@ -49,7 +49,7 @@ export const switchOrderStatusTab = ({ dispatch }, status = 'new') => {
     }
     dispatch('SET_TAB_STATUS', status);
     Vue.http({
-        url:API_URL+'getOrders?status='+status,
+        url:API_URL+'orders?status='+status,
         method: 'GET'
     }).then(function (response) {
         dispatch('FETCH_ORDER_LISTS', response.data.data);
