@@ -87,7 +87,7 @@ const _getDocument = (params, url = 'merchant-api/order-fufillment') => {
  * @return
  */
 
-const _postOrderStatus = ({ params, url = '' }) => {
+const _postOrderStatus = (params, url ) => {
     var apiUrl = API_URL + url;
     Vue.http.post({
         apiUrl, params
@@ -101,8 +101,9 @@ const _postOrderStatus = ({ params, url = '' }) => {
  * @param  {String} selector   Jquery selector
  * @return {Array}    order lists
  */
-const _getSelectedOrders = ({ selector = 'input:checkbox[name=id]:checked' }) => {
-    var orders = $('input:checkbox[name=id]:checked');
+const _getSelectedOrders = ( selector = 'input:checkbox[name=id]:checked' ) => {
+    console.log(selector);
+    var orders = $(selector);
     if (orders.length === 0) {
         $.isLoading({ text: "Please Select order First", class:"fa fa-exclamation-triangle"});
         setTimeout( function(){
@@ -125,7 +126,7 @@ export const setReadyToShip = ({ dispatch }, orders = []) => {
             id: ids,
             status: 'ready'
         };
-        _postOrderStatus(param)
+        _postOrderStatus(param);
     }
 };
 
@@ -172,10 +173,6 @@ export const printAWBLable = ({ dispatch }, orders = []) => {
         };
         _getDocument(param);
     }
-};
-
-export const scanTrackingNo = ({ dispatch }, tracking_no = '') => {
-
 };
 
 export const checkboxHelper = ({ dispatch }) => {

@@ -13,9 +13,10 @@ Vue.config.devtools = true
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-var router = new VueRouter();
-
-var router = new VueRouter();
+var router = new VueRouter({
+    history: true,
+    root: ''
+});
 
 router.map({
     '/order': {

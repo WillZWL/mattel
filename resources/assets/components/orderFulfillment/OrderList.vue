@@ -5,8 +5,34 @@
   table .fa-search-plus {
     font-size: 16px;
   }
+  .alert {
+    padding: 5px;margin-bottom: 10px;
+  }
+  .alert-dismissible .close {
+    top: 0;right: 0;line-height: 0.8
+  }
 </style>
 <template>
+  <div class="x_content" v-if="id == 'table_content2'">
+    <div class="col-md-6 col-xs-12 form-horizontal">
+      <div class="form-group">
+          <label class="control-label col-md-3">Tracking No.</label>
+          <div class="col-md-6 col-xs-12">
+              <input type="text" name="tracking_no" class="form-control" placeholder="Enter or Scan Tracking No"
+              v-on:keyup.enter="scanTrackingNo" v-model="tracking_no">
+          </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!--success-->
+    <div>
+      <div class="alert alert-success alert-dismissible fade in" role="alert" v-if="scanResultList.length>0" v-for="scanResult in scanResultList">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+          </button>
+          {{scanResult.text}}
+      </div>
+    </div>
+  </div>
   <table id="{{id}}" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
     <thead>
       <tr>
@@ -46,7 +72,7 @@
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
           </template>
-          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(order.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
+          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder([order.id])"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
       </tr>
     </tbody>
@@ -68,10 +94,6 @@
               data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="setReadyToShip()"
             >Ready To Ship</button>
-    <button v-if="id == 'table_content2'" type="button" class="btn btn-primary"
-            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
-            v-on:click="scanTrackingNo()">
-            Scan Tracking No.</button>
     <button v-if="id != 'table_content3'" type="button" class="btn btn-danger"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="cancelOrder()">
@@ -87,7 +109,6 @@
       printPickingList,
       printInvoice,
       printAWBLable,
-      scanTrackingNo,
     } from '../../vuex/actions';
 
   import { getTableHeaders } from '../../vuex/getters';
@@ -100,8 +121,7 @@
         cancelOrder,
         printPickingList,
         printInvoice,
-        printAWBLable,
-        scanTrackingNo
+        printAWBLable
       },
       getters: {
         headers: getTableHeaders
@@ -118,7 +138,10 @@
       this.checkboxHelper()
     },
     data() {
-      return {}
+      return {
+        scanResultList: [],
+        tracking_no: '',
+      }
     },
     methods: {
       allocateOrders: function(orders = [])
@@ -127,6 +150,13 @@
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
+      },
+      scanTrackingNo: function() {
+        var text = this.tracking_no.trim()
+        if (text) {
+          this.scanResultList.push({text:"Your Tranking No is "+ text});
+          this.tracking_no = ''
+        }
       }
     }
   }
