@@ -17,6 +17,7 @@ const state = {
       'Inventory',
       'Action'
     ],
+    orderDetail:{},
 };
 
 const mutations = {
@@ -28,6 +29,9 @@ const mutations = {
     },
     SET_TABLE_HEADERS(state, headers) {
         state.tableHeaders = headers;
+    },
+    SET_ORDER_DETAIL(state, detail) {
+        state.orderDetail = detail;
     }
 };
 

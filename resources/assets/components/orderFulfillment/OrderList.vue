@@ -50,12 +50,12 @@
         <td>{{order.biz_type}}</td>
         <td>{{order.merchant}}</td>
         <td>
-          <a data-toggle="modal" data-target=".overview{{$index}}-{{id}}">
+          <a data-toggle="modal" data-target=".overview{{$index}}-{{id}}" v-on:click="fetchOrderDetail(order.id)">
             {{order.platform_order_id}}&nbsp;&nbsp;<i class="fa fa-search-plus"></i>
           </a>
           <div class="modal fade overview{{$index}}-{{id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
             <!-- detail overview-->
-            <order-detail :index="$index"></order-detail>
+            <order-detail :index="$index" :detail="detail"></order-detail>
           </div>
         </td>
         <td>{{order.order_create_date}}</td>
@@ -109,9 +109,10 @@
       printPickingList,
       printInvoice,
       printAWBLable,
+      fetchOrderDetail
     } from '../../vuex/actions';
 
-  import { getTableHeaders } from '../../vuex/getters';
+  import { getTableHeaders, getOrderDetail } from '../../vuex/getters';
 
   export default {
     vuex: {
@@ -121,10 +122,12 @@
         cancelOrder,
         printPickingList,
         printInvoice,
-        printAWBLable
+        printAWBLable,
+        fetchOrderDetail
       },
       getters: {
-        headers: getTableHeaders
+        headers: getTableHeaders,
+        detail: getOrderDetail
       }
     },
     components: {
@@ -140,7 +143,7 @@
     data() {
       return {
         scanResultList: [],
-        tracking_no: '',
+        tracking_no: ''
       }
     },
     methods: {
@@ -157,7 +160,7 @@
           this.scanResultList.push({text:"Your Tranking No is "+ text});
           this.tracking_no = ''
         }
-      }
+      },
     }
   }
 </script>

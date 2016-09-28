@@ -1,6 +1,6 @@
 import {router} from './app'
 
-// const API_URL = 'http://vanguard/'
+// const API_URL = 'http://vanguard/'  //DEV API URL
 const API_URL = 'http://admincentre.eservicesgroup.com:7890/';
 const TOKEN_URL = API_URL + 'oauth/access_token'
 

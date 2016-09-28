@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     login () {
+      $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
       var credentials = {
         username: this.credentials.username,
         password: this.credentials.password
@@ -75,8 +76,10 @@ export default {
       auth.login(this, credentials, loggedIn => {
         if (!loggedIn) {
           this.error = true
+          $.isLoading("hide");
         } else {
-          this.$router.replace(this.$route.query.redirect || '/order')
+          this.$router.replace(this.$route.query.redirect || '/');
+          $.isLoading("hide");
         }
       })
     }

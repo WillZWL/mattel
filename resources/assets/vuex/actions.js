@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-// export const API_URL = 'http://vanguard/api/';
+// export const API_URL = 'http://vanguard/api/';  // For DEV
 export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
 
 export const newHeaders = [
@@ -39,6 +39,7 @@ export const shippedHeaders = [
             ]
 
 export const switchOrderStatusTab = ({ dispatch }, status = 'new') => {
+    dispatch('FETCH_ORDER_LISTS', []);
     $.isLoading({ text: "Loading  "+ status + " orders", class:"fa fa-refresh fa-spin" });
     if (status == 'new') {
         dispatch('SET_TABLE_HEADERS', newHeaders);
@@ -51,7 +52,7 @@ export const switchOrderStatusTab = ({ dispatch }, status = 'new') => {
     }
     dispatch('SET_TAB_STATUS', status);
     Vue.http({
-        url:API_URL+'getOrders?status='+status,
+        url:API_URL+'orders?status='+status,
         method: 'GET'
     }).then(function (response) {
         dispatch('FETCH_ORDER_LISTS', response.data.data);
@@ -177,6 +178,20 @@ export const printAWBLable = ({ dispatch }, orders = []) => {
             document_type: 'shippingLabel'
         };
         _getDocument(param);
+    }
+};
+
+export const fetchOrderDetail = ({ dispatch }, order_id ) => {
+    dispatch('SET_ORDER_DETAIL', {});
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (order_id) {
+        Vue.http({
+            url:API_URL+'orders/'+order_id,
+            method: 'GET'
+        }).then(function (response) {
+            dispatch('SET_ORDER_DETAIL', response.data.data[0]);
+            $.isLoading("hide");
+        });
     }
 };
 
