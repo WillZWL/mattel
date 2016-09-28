@@ -2,7 +2,9 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/';
+// export const API_URL = 'http://vanguard/api/';
+export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
+
 export const newHeaders = [
               'BizType',
               'Merchant',
@@ -124,7 +126,7 @@ export const setReadyToShip = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            status: 'ready'
+            status: 'readyToShip'
         };
         _postOrderStatus(param);
     }
@@ -135,7 +137,7 @@ export const cancelOrder = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            status: 'cancel'
+            status: 'cancelOrder'
         };
         _postOrderStatus(param);
     }
@@ -146,10 +148,13 @@ export const printPickingList = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            document_type: 'pickList'
         };
-        _getDocument(param);
+        var apiUrl = API_URL + 'merchant-api/order-picking-list';
+        Vue.http.post({
+            apiUrl, params
+        }).then( function (response) {
 
+        });
     }
 };
 
