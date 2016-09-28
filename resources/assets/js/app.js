@@ -15,8 +15,6 @@ Vue.use(VueResource)
 
 var router = new VueRouter();
 
-Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.access_token;
-
 var router = new VueRouter();
 
 router.map({
@@ -31,13 +29,14 @@ router.map({
         auth: false
     },
     '/': {
-        name:'Home',
+        name:'Order Fulfilment',
         component: require('../components/OrderFulfillment.vue'),
         auth: true
     }
 });
 
 router.beforeEach((transition) => {
+    Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.access_token;
     if (transition.to.auth) {
         if (!auth.checkAuth()) {
           transition.redirect('/login')
