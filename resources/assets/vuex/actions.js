@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-// export const API_URL = 'http://vanguard/api/';  // For DEV
+//export const API_URL = 'http://vanguard.dev/api/' // For DEV
 export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
 
 export const newHeaders = [
@@ -79,9 +79,20 @@ const _getDocument = (params, url = 'merchant-api/order-fufillment') => {
     Vue.http.post(
         apiUrl, params
     ).then( function (response) {
-
+        _downloadDocument(response.data.document);
     });
 };
+
+function _downloadDocument(documentUrl){
+    if(documentUrl !== null){
+        $('.tempLink').remove();
+        var link = document.createElement('a');
+        link.setAttribute('href', documentUrl);
+        link.setAttribute('class', 'tempLink');
+        $('body').append(link);
+        link.click();
+    }
+}
 
 /**
  * _postOrderStatus
@@ -155,7 +166,7 @@ export const printPickingList = ({ dispatch }, orders = []) => {
             apiUrl,
             param
         ).then( function (response) {
-
+            _downloadDocument(response.data.document);
         });
     }
 };
