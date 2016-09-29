@@ -10,8 +10,12 @@
 }
 </style>
 <template>
-  <section style="height: 90px">
-
+  <section style="height: 180px">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <img src="/images/logo.png">
+      </div>
+    </div>
   </section>
   <div class="container">
     <div class="row">
