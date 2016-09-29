@@ -165,7 +165,7 @@ export const printInvoice = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            document_type: 'Invoice'
+            document_type: 'invoice'
         };
         _getDocument(param);
     }
