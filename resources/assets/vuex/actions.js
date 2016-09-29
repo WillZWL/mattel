@@ -76,9 +76,9 @@ export const switchOrderStatusTab = ({ dispatch }, status = 'new') => {
 const _getDocument = (params, url = 'merchant-api/order-fufillment') => {
     params.action = 'getDocument';
     var apiUrl = API_URL + url;
-    Vue.http.post({
+    Vue.http.post(
         apiUrl, params
-    }).then( function (response) {
+    ).then( function (response) {
 
     });
 };
@@ -92,9 +92,9 @@ const _getDocument = (params, url = 'merchant-api/order-fufillment') => {
 
 const _postOrderStatus = (params, url ) => {
     var apiUrl = API_URL + url;
-    Vue.http.post({
+    Vue.http.post(
         apiUrl, params
-    }).then( function (response) {
+    ).then( function (response) {
 
     });
 };
@@ -151,9 +151,10 @@ export const printPickingList = ({ dispatch }, orders = []) => {
             id: ids,
         };
         var apiUrl = API_URL + 'merchant-api/order-picking-list';
-        Vue.http.post({
-            apiUrl, params
-        }).then( function (response) {
+        Vue.http.post(
+            apiUrl,
+            param
+        ).then( function (response) {
 
         });
     }
