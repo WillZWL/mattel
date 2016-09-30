@@ -106,7 +106,17 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
     Vue.http.post(
         apiUrl, params
     ).then( function (response) {
-
+        if(response.data.status=="success"){
+            var message ='';
+            $.each(response.data.message, function(key, rowData) {
+                $.each(rowData, function(soNo, val) {
+                    message = message + soNo + val;
+                });
+            });
+            alert(message);
+        }else if (response.data.status=="failed"){
+            alert(response.data.message);
+        }
     });
 };
 
@@ -138,7 +148,7 @@ export const setReadyToShip = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            status: 'readyToShip'
+            action: 'readyToShip'
         };
         _postOrderStatus(param);
     }
@@ -149,7 +159,7 @@ export const cancelOrder = ({ dispatch }, orders = []) => {
     if (ids) {
         var param = {
             id: ids,
-            status: 'cancelOrder'
+            action: 'cancelOrder'
         };
         _postOrderStatus(param);
     }
