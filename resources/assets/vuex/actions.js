@@ -101,7 +101,7 @@ function _downloadDocument(documentUrl){
  * @return
  */
 
-const _postOrderStatus = (params, url ) => {
+const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
     var apiUrl = API_URL + url;
     Vue.http.post(
         apiUrl, params
