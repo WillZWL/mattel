@@ -29,6 +29,11 @@ router.map({
         component: require('../components/auth/Login.vue'),
         auth: false
     },
+    '/dc-sku-mapping': {
+        name: 'DC SKU Mapping To ESG',
+        component: require('../components/DcSkuMapping.vue'),
+        auth:true
+    },
     '/': {
         name:'Order Fulfilment',
         component: require('../components/OrderFulfillment.vue'),
@@ -43,10 +48,10 @@ router.beforeEach((transition) => {
           transition.redirect('/login')
         }
     } else if (transition.to.path == '/login' && auth.checkAuth()) {
-      transition.redirect('/')
+        transition.redirect('/')
     } else if (transition.to.path == '/logout') {
-      auth.logout()
-      transition.redirect('login')
+        auth.logout()
+        transition.redirect('login')
     }
 
     transition.next()

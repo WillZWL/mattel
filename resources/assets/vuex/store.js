@@ -18,6 +18,12 @@ const state = {
       'Action'
     ],
     orderDetail:{},
+    mappingLists: [],
+    mappingMeta: {
+      pagination: {
+          'current_page': 0
+      }
+    }
 };
 
 const mutations = {
@@ -32,6 +38,10 @@ const mutations = {
     },
     SET_ORDER_DETAIL(state, detail) {
         state.orderDetail = detail;
+    },
+    FETCH_MAPPING_LISTS(state, mappingLists, mappingMeta) {
+        state.mappingLists = mappingLists;
+        state.mappingMeta = mappingMeta;
     }
 };
 

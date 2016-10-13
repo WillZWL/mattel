@@ -7,3 +7,4 @@ require('fastclick');
 require('install');
 require('is-loading');
 require('jquery-ui');
+require('js-url');
