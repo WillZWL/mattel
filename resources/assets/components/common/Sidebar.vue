@@ -13,6 +13,9 @@
             <li>
               <a v-link="'/'"><i class="fa fa-home"></i> Order <span class="fa fa-chevron-down"></span></a>
             </li>
+            <li>
+              <a v-link="'/dc-sku-mapping'"><i class="fa fa-shopping-cart"></i>DC SKU Mapping <span class="fa fa-chevron-down"></span></a>
+            </li>
           </ul>
         </div>
       </div>

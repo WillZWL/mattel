@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-//export const API_URL = 'http://vanguard.dev/api/' // For DEV
+// export const API_URL = 'http://vanguard/api/' // For DEV
 export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
 
 export const newHeaders = [
@@ -58,6 +58,12 @@ export const switchOrderStatusTab = ({ dispatch }, status = 'new') => {
         dispatch('FETCH_ORDER_LISTS', response.data.data);
     }).then (function () {
         $.isLoading("hide");
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
     });
 };
 
@@ -216,6 +222,28 @@ export const fetchOrderDetail = ({ dispatch }, order_id ) => {
         });
     }
 };
+
+export const mattelSkuMappingSearch = ({ dispatch }, queryStr = '') => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+    console.log(queryStr);
+    window.history.pushState(null, null, 'dc-sku-mapping?'+queryStr);
+    Vue.http({
+        url:API_URL+'mattel-sku-mapping-list?'+queryStr,
+        method: 'GET'
+    }).then(function (response) {
+        $.isLoading("hide");
+        dispatch('FETCH_MAPPING_LISTS', response.data.data, response.data.meta);
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
+}
 
 export const checkboxHelper = ({ dispatch }) => {
     if ($("input.flat")[0]) {
