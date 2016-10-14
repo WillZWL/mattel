@@ -34,6 +34,11 @@ router.map({
         component: require('../components/DcSkuMapping.vue'),
         auth:true
     },
+    '/inventory': {
+        name: 'Mattel SKU Inventory Management',
+        component: require('../components/MattelInventory.vue'),
+        auth:true
+    },
     '/': {
         name:'Order Fulfilment',
         component: require('../components/OrderFulfillment.vue'),

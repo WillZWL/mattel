@@ -132,7 +132,6 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
  * @return {Array}    order lists
  */
 const _getSelectedOrders = ( selector = 'input:checkbox[name=id]:checked' ) => {
-    console.log(selector);
     var orders = $(selector);
     if (orders.length === 0) {
         $.isLoading({ text: "Please Select order First", class:"fa fa-exclamation-triangle"});
@@ -228,7 +227,6 @@ export const mattelSkuMappingSearch = ({ dispatch }, queryStr = '') => {
     if (queryStr == '') {
         var queryStr = $("form[name='fm']").serialize();
     }
-    console.log(queryStr);
     window.history.pushState(null, null, 'dc-sku-mapping?'+queryStr);
     Vue.http({
         url:API_URL+'mattel-sku-mapping-list?'+queryStr,

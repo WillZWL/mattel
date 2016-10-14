@@ -21,7 +21,8 @@ const state = {
     mappingLists: [],
     mappingMeta: {
       pagination: {
-          'current_page': 0
+          'current_page': 0,
+          'total_pages': 0
       }
     }
 };
