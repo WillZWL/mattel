@@ -22,7 +22,11 @@ export default {
       cb(true)
       return
     }, (response) => {
-
+        $.isLoading("hide");
+        $.isLoading({ text: "Login Fail, Please Check Your Login Account", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 2000)
     })
   },
 
