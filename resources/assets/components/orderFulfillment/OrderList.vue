@@ -87,6 +87,9 @@
     <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="printAWBLable()"><i class="fa fa-print"></i>  AWB label</button>
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
+            v-on:click="printCarrierManifestLable()"><i class="fa fa-print"></i>  Carrier Manifest</button>        
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
@@ -109,6 +112,7 @@
       printPickingList,
       printInvoice,
       printAWBLable,
+      printCarrierManifestLable,
       fetchOrderDetail
     } from '../../vuex/actions';
 
@@ -123,6 +127,7 @@
         printPickingList,
         printInvoice,
         printAWBLable,
+        printCarrierManifestLable,
         fetchOrderDetail
       },
       getters: {
