@@ -127,7 +127,7 @@
         printPickingList,
         printInvoice,
         printAWBLable,
-        printCarrierManifestLable
+        printCarrierManifestLable,
         fetchOrderDetail
       },
       getters: {
