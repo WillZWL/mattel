@@ -37,7 +37,7 @@
     "laravel-elixir-vueify": "^2.0.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.14.0",
-    "node-sass": "https://registry.npmjs.org/node-sass/-/node-sass-3.10.0.tgz",
+    "node-sass": "^3.10.1",
     "npm": "^3.10.8",
     "select2": "^4.0.3",
     "switchery": "0.0.2",
