@@ -116,10 +116,11 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
             var message ='';
             $.each(response.data.message, function(key, rowData) {
                 $.each(rowData, function(soNo, val) {
-                    message = message + soNo + val;
+                    message = message + "Order No " +soNo + val;
                 });
             });
             alert(message);
+            window.location.reload();
         }else if (response.data.status=="failed"){
             alert(response.data.message);
         }
