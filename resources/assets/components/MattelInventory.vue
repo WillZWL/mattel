@@ -8,6 +8,8 @@
             <titlebar></titlebar>
             <div class="row">
               <filters></filters>
+              <sku-list></sku-list>
+              <upload></upload>
             </div>
           </div>
         <footbar></footbar>
@@ -17,6 +19,8 @@
 </template>
 <script>
   import Filters from './mattelInventory/Filters.vue';
+  import SkuList from './mattelInventory/SkuList.vue';
+  import Upload from './mattelInventory/Upload.vue';
   import Titlebar from './common/Titlebar.vue';
   import Navbar from './common/Navbar.vue';
   import Sidebar from './common/Sidebar.vue';
@@ -24,6 +28,8 @@
   export default {
     components: {
       Filters,
+      SkuList,
+      Upload,
       Titlebar,
       Navbar,
       Sidebar,

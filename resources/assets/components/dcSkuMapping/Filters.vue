@@ -46,9 +46,6 @@ export default {
   vuex: {
     actions: {
       submitForm: mattelSkuMappingSearch
-    },
-    getters: {
-
     }
   },
   ready () {
