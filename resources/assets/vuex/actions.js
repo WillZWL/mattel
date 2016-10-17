@@ -209,6 +209,17 @@ export const printAWBLable = ({ dispatch }, orders = []) => {
     }
 };
 
+export const printCarrierManifestLable = ({ dispatch }, orders = []) => {
+    var ids = _getSelectedOrders()
+    if (ids) {
+        var param = {
+            id: ids,
+            document_type: 'carrierManifest'
+        };
+        _getDocument(param);
+    }
+};
+
 export const fetchOrderDetail = ({ dispatch }, order_id ) => {
     dispatch('SET_ORDER_DETAIL', {});
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
