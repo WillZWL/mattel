@@ -18,19 +18,19 @@
             </tr>
           </tbody>
         </table>
-        <pagination :meta="meta"></pagination>
+        <pagination-component :meta="meta"></pagination-component>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Pagination from '../common/Pagination.vue';
+  import PaginationComponent from '../common/PaginationComponent.vue';
   import { mattelSkuMappingSearch } from '../../vuex/actions';
   import { getMappingLists, getMappingMeta } from '../../vuex/getters';
   export default {
     components: {
-      Pagination
+      PaginationComponent
     },
     vuex: {
       actions: {
