@@ -3,7 +3,7 @@
     <div class="left_col scroll-view">
       <div class="navbar nav_title" style="border: 0;">
         <a href="index.html" class="site_title">
-          <img src="/images/ml-logo.png" style="max-width: 32px;margin:0 10px" alt="Mattel"> 
+          <img src="/images/ml-logo.png" style="max-width: 32px;margin:0 10px" alt="Mattel">
           <span>[Order Fulfilment]</span>
         </a>
       </div>
@@ -19,9 +19,9 @@
             <li>
               <a v-link="'/dc-sku-mapping'"><i class="fa fa-shopping-cart"></i>DC SKU Mapping <span class="fa fa-chevron-down"></span></a>
             </li>
-            <li>
+            <!-- <li>
               <a v-link="'/inventory'"><i class="fa fa-bar-chart"></i>Inventory <span class="fa fa-chevron-down"></span></a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
