@@ -21,17 +21,17 @@
           </div>
           <!--right side-->
           <div class="col-md-6 col-xs-12">
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="control-label col-md-4">DC SKU.</label>
                 <div class="col-md-6 col-xs-12">
                     <input type="text" name="dc_sku" class="form-control col-md-6 col-xs-12">
                 </div>
-            </div>
+            </div> -->
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
               <input type="button" class="btn btn-dark" name='reset' value="Reset">
-              <input type="button" class="btn btn-success" name="search" value="Search">
+              <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">
             </div>
           </div>
         </form>
@@ -40,19 +40,18 @@
   </div>
 </template>
 <script>
-import { mattelSkuMappingSearch } from '../../vuex/actions';
+import { skuInventorySearch } from '../../vuex/actions';
 
 export default {
   vuex: {
     actions: {
-      submitForm: mattelSkuMappingSearch
-    },
-    getters: {
-
+      submitForm: skuInventorySearch
     }
   },
   ready () {
-
+    if (url('query')) {
+      this.submitForm(url('query'));
+    }
   }
 }
 </script>

@@ -24,6 +24,13 @@ const state = {
           'current_page': 0,
           'total_pages': 0
       }
+    },
+    inventoryLists: [],
+    inventoryMeta: {
+      pagination: {
+          'current_page': 0,
+          'total_pages': 0
+      }
     }
 };
 
@@ -43,6 +50,10 @@ const mutations = {
     FETCH_MAPPING_LISTS(state, mappingLists, mappingMeta) {
         state.mappingLists = mappingLists;
         state.mappingMeta = mappingMeta;
+    },
+    FETCH_INVENTORY_LISTS(state, inventoryLists, inventoryMeta) {
+        state.inventoryLists = inventoryLists;
+        state.inventoryMeta = inventoryMeta;
     }
 };
 

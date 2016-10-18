@@ -255,6 +255,27 @@ export const mattelSkuMappingSearch = ({ dispatch }, queryStr = '') => {
     });
 }
 
+export const skuInventorySearch = ({ dispatch }, queryStr = '') => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+    window.history.pushState(null, null, 'inventory?'+queryStr);
+    Vue.http({
+        url:API_URL+'platform-market-inventory?'+queryStr,
+        method: 'GET'
+    }).then(function (response) {
+        $.isLoading("hide");
+        dispatch('FETCH_INVENTORY_LISTS', response.data.data, response.data.meta);
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
+}
+
 export const checkboxHelper = ({ dispatch }) => {
     if ($("input.flat")[0]) {
         $('input.flat').iCheck({ checkboxClass: 'icheckbox_flat-green' });
