@@ -18,6 +18,7 @@ const state = {
       'Action'
     ],
     orderDetail:{},
+    scanResult:{},
     mappingLists: [],
     mappingMeta: {
       pagination: {
@@ -46,6 +47,9 @@ const mutations = {
     },
     SET_ORDER_DETAIL(state, detail) {
         state.orderDetail = detail;
+    },
+    SCAN_TRACKING_NO(state, result) {
+        state.scanResult = result;
     },
     FETCH_MAPPING_LISTS(state, mappingLists, mappingMeta) {
         state.mappingLists = mappingLists;

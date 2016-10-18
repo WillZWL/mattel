@@ -220,6 +220,23 @@ export const printCarrierManifestLable = ({ dispatch }, orders = []) => {
     }
 };
 
+export const scanTrackingNo = ( {dispatch}, tracking_no ) => {
+    dispatch('SCAN_TRACKING_NO', {});
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (tracking_no) {
+        var param = {
+            "tracking_no": tracking_no,
+        };
+        var apiUrl = API_URL + 'merchant-api/scan-tracking-no';
+        Vue.http.post(
+            apiUrl,param
+        ).then( function (response) {
+            dispatch('SCAN_TRACKING_NO', response.data);
+            $.isLoading("hide");
+        });
+    }
+};
+
 export const fetchOrderDetail = ({ dispatch }, order_id ) => {
     dispatch('SET_ORDER_DETAIL', {});
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
