@@ -19,7 +19,7 @@
           <label class="control-label col-md-3">Tracking No.</label>
           <div class="col-md-6 col-xs-12">
               <input type="text" name="tracking_no" class="form-control" placeholder="Enter or Scan Tracking No"
-              v-on:keyup.enter="scanTrackingNo(this.tracking_no.trim())" v-model="tracking_no">
+              v-on:keyup.enter="scanTrackingNo()" v-model="tracking_no">
           </div>
       </div>
     </div>
@@ -129,14 +129,14 @@
         printInvoice,
         printAWBLable,
         printCarrierManifestLable,
-        scanTrackingNo,
+        vuexScanTrackingNo:scanTrackingNo,
         fetchOrderDetail
       },
       getters: {
         headers: getTableHeaders,
         detail: getOrderDetail,
-        scanResult: getScanResult
-      }
+        scanResultData: getScanResult
+      },
     },
     components: {
       OrderDetail
@@ -161,6 +161,14 @@
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
+      },
+      scanTrackingNo: function() {
+        var tracking_no = this.tracking_no.trim()
+        if (tracking_no) {
+          this.vuexScanTrackingNo(tracking_no);
+          this.scanResultList.push({text:"Your Tranking No is "+ tracking_no});
+          this.tracking_no = '';
+        }
       },
     }
   }
