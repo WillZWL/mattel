@@ -220,6 +220,23 @@ export const printCarrierManifestLable = ({ dispatch }, orders = []) => {
     }
 };
 
+export const scanTrackingNo = ( {dispatch}, tracking_no ) => {
+    dispatch('SCAN_TRACKING_NO', {});
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (tracking_no) {
+        var param = {
+            "tracking_no": tracking_no,
+        };
+        var apiUrl = API_URL + 'merchant-api/scan-tracking-no';
+        Vue.http.post(
+            apiUrl,param
+        ).then( function (response) {
+            dispatch('SCAN_TRACKING_NO', response.data);
+            $.isLoading("hide");
+        });
+    }
+};
+
 export const fetchOrderDetail = ({ dispatch }, order_id ) => {
     dispatch('SET_ORDER_DETAIL', {});
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
@@ -246,6 +263,27 @@ export const mattelSkuMappingSearch = ({ dispatch }, queryStr = '') => {
     }).then(function (response) {
         $.isLoading("hide");
         dispatch('FETCH_MAPPING_LISTS', response.data.data, response.data.meta);
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
+}
+
+export const skuInventorySearch = ({ dispatch }, queryStr = '') => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+    window.history.pushState(null, null, 'inventory?'+queryStr);
+    Vue.http({
+        url:API_URL+'platform-market-inventory?'+queryStr,
+        method: 'GET'
+    }).then(function (response) {
+        $.isLoading("hide");
+        dispatch('FETCH_INVENTORY_LISTS', response.data.data, response.data.meta);
     }).catch(function(){
         $.isLoading("hide");
         $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });

@@ -19,9 +19,9 @@
             <li>
               <a v-link="'/dc-sku-mapping'"><i class="fa fa-shopping-cart"></i>DC SKU Mapping <span class="fa fa-chevron-down"></span></a>
             </li>
-            <!-- <li>
+            <li>
               <a v-link="'/inventory'"><i class="fa fa-bar-chart"></i>Inventory <span class="fa fa-chevron-down"></span></a>
-            </li> -->
+            </li>
           </ul>
         </div>
       </div>

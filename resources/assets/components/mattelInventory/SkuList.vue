@@ -8,13 +8,17 @@
               <th>WAREHOUSE ID</th>
               <th>Mattel SKU</th>
               <th>DC SKU</th>
+              <th>Inventory</th>
+              <th>Thershold</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="mapping in mappings">
-              <td>{{ mapping.warehouse_id }}</td>
-              <td>{{ mapping.mattel_sku }}</td>
-              <td>{{ mapping.dc_sku }}</td>
+            <tr v-for="inventory in inventorys">
+              <td>{{ inventory.warehouse_id }}</td>
+              <td>{{ inventory.mattel_sku }}</td>
+              <td>{{ inventory.dc_sku }}</td>
+              <td>{{ inventory.inventory }}</td>
+              <td>{{ inventory.threshold }}</td>
             </tr>
           </tbody>
         </table>
@@ -26,19 +30,19 @@
 
 <script>
   import PaginationComponent from '../common/PaginationComponent.vue';
-  import { mattelSkuMappingSearch } from '../../vuex/actions';
-  import { getMappingLists, getMappingMeta } from '../../vuex/getters';
+  import { skuInventorySearch } from '../../vuex/actions';
+  import { getInventoryLists, getInventoryMeta } from '../../vuex/getters';
   export default {
     components: {
       PaginationComponent
     },
     vuex: {
       actions: {
-        submitForm: mattelSkuMappingSearch
+        submitForm: skuInventorySearch
       },
       getters: {
-        mappings: getMappingLists,
-        meta: getMappingMeta,
+        inventorys: getInventoryLists,
+        meta: getInventoryMeta,
       }
     },
     methods: {
