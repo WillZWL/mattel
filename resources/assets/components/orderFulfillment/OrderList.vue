@@ -65,7 +65,7 @@
           <p v-for="(sku, qty) in order.items">{{sku}} Qty:{{qty}}</p>
         </td>
         <td>{{order.inventory}}</td>
-        <td v-if="id != 'table_content3'">
+        <td v-if="id == 'table_content1'">
           <template v-if="id == 'table_content1'">
             <button v-if="order.inventory > order.order_qty" type="button" class="btn btn-sm btn-primary">
                     Ready To Ship</button> &nbsp;&nbsp;
