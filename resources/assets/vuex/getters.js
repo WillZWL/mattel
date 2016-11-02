@@ -15,3 +15,5 @@ export const getInventoryLists = (state) => state.inventoryLists;
 export const getInventoryMeta = (state) => state.inventoryMeta;
 
 export const getScanResult = (state) => state.scanResult;
+
+export const getOrdersMeta = (state) => state.ordersMeta;
