@@ -25,8 +25,8 @@
     </div>
     <div class="clearfix"></div>
     <!--success-->
-    <div>
-      <div class="alert alert-success alert-dismissible fade in" role="alert" v-if="scanResultList.length>0" v-for="scanResult in scanResultList">
+    <div v-if="scanResultList.length>0">
+      <div class="alert alert-success alert-dismissible fade in" role="alert" v-for="scanResult in scanResultList">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
           </button>
           {{scanResult.text}}
@@ -71,12 +71,15 @@
                     Ready To Ship</button> &nbsp;&nbsp;
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
+            <button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder([order.id])"><i class="fa fa-trash-o"></i> Cancel</button>
           </template>
-          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder([order.id])"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <pagination-component :meta="meta"></pagination-component>
+
   <div v-if="id != 'table_content3'" class="x_content">
     <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
@@ -89,7 +92,7 @@
             v-on:click="printAWBLable()"><i class="fa fa-print"></i>  AWB label</button>
     <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
-            v-on:click="printCarrierManifestLable()"><i class="fa fa-print"></i>  Carrier Manifest</button>        
+            v-on:click="printCarrierManifestLable()"><i class="fa fa-print"></i>  Carrier Manifest</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
@@ -97,7 +100,7 @@
               data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="setReadyToShip()"
             >Ready To Ship</button>
-    <button v-if="id != 'table_content3'" type="button" class="btn btn-danger"
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-danger"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="cancelOrder()">
             <i class="fa fa-trash-o"></i> Cancel</button>
@@ -105,6 +108,8 @@
 </template>
 <script>
   import OrderDetail from './OrderDetail.vue'
+  import PaginationComponent from '../common/PaginationComponent.vue';
+
   import {
       checkboxHelper,
       setReadyToShip,
@@ -113,10 +118,12 @@
       printInvoice,
       printAWBLable,
       printCarrierManifestLable,
-      fetchOrderDetail
+      fetchOrderDetail,
+      scanTrackingNo,
+      switchOrderStatusTab
     } from '../../vuex/actions';
 
-  import { getTableHeaders, getOrderDetail } from '../../vuex/getters';
+  import { getTableHeaders, getOrderDetail,getScanResult, getTabStatus, getOrdersMeta } from '../../vuex/getters';
 
   export default {
     vuex: {
@@ -128,15 +135,22 @@
         printInvoice,
         printAWBLable,
         printCarrierManifestLable,
-        fetchOrderDetail
+        fetchOrderDetail,
+        vuexScanTrackingNo:scanTrackingNo,
+        fetchOrderDetail,
+        switchOrderStatusTab
       },
       getters: {
         headers: getTableHeaders,
-        detail: getOrderDetail
-      }
+        detail: getOrderDetail,
+        scanResultData: getScanResult,
+        meta: getOrdersMeta,
+        status: getTabStatus
+      },
     },
     components: {
-      OrderDetail
+      OrderDetail,
+      PaginationComponent
     },
     props: [
       'id',
@@ -166,6 +180,10 @@
           this.tracking_no = ''
         }
       },
+      pagination: function(url) {
+        var query_str = $.url('query', url);
+        this.switchOrderStatusTab(this.status, query_str);
+      }
     }
   }
 </script>
