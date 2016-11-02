@@ -5,6 +5,12 @@ Vue.use(Vuex);
 
 const state = {
     orderLists: [],
+    ordersMeta: {
+      pagination: {
+          'current_page': 0,
+          'total_pages': 0
+      }
+    },
     tabStatus:'new',
     tableHeaders: [
       'BizType',
@@ -39,8 +45,9 @@ const mutations = {
     SET_TAB_STATUS(state, status) {
         state.tabStatus = status;
     },
-    FETCH_ORDER_LISTS(state, orderLists) {
+    FETCH_ORDER_LISTS(state, orderLists, ordersMeta) {
         state.orderLists = orderLists;
+        state.ordersMeta = ordersMeta;
     },
     SET_TABLE_HEADERS(state, headers) {
         state.tableHeaders = headers;
