@@ -129,7 +129,12 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
         }else if (response.data.status=="failed"){
             alert(response.data.message);
         }
-    });
+    }).catch( function() {
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 1000)
+    })
 };
 
 /**
@@ -153,6 +158,10 @@ const _getSelectedOrders = ( selector = 'input:checkbox[name=id]:checked' ) => {
     return ids;
 };
 
+export const getSelectedOrders = ({ dispatch }) => {
+    var ids = _getSelectedOrders();
+    return ids;
+}
 
 export const setReadyToShip = ({ dispatch }, orders = []) => {
     var ids = _getSelectedOrders();
@@ -165,12 +174,13 @@ export const setReadyToShip = ({ dispatch }, orders = []) => {
     }
 };
 
-export const cancelOrder = ({ dispatch }, orders = []) => {
-    var ids = _getSelectedOrders();
-    if (ids) {
+export const postCancelOrder = ({ dispatch }, orders = [], type = '', reason = '') => {
+    if (orders) {
         var param = {
-            id: ids,
-            action: 'cancelOrder'
+            id: orders,
+            action: 'cancelOrder',
+            type: type,
+            reason: reason
         };
         _postOrderStatus(param);
     }
@@ -295,6 +305,28 @@ export const skuInventorySearch = ({ dispatch }, queryStr = '') => {
         setTimeout( function(){
             $.isLoading("hide");
         }, 3000)
+    });
+}
+
+export const fetchCancelReason = ({ dispatch }) => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    Vue.http({
+        url:API_URL+'merchant-api/order-cancel-reason',
+        method: 'POST'
+    }).then( function (response) {
+        $.isLoading("hide");
+        var cancelReason = [];
+        var type = []
+        for (var i in response.data) {
+            for (var j in response.data[i]) {
+                type.push(j);
+                for (var n = 0; n < response.data[i][j].length; n++) {
+                    cancelReason.push(response.data[i][j][n])
+                }
+            }
+        }
+        dispatch('FETCH_CANCEL_TYPE', type);
+        dispatch('FETCH_CANCEL_REASON', cancelReason);
     });
 }
 

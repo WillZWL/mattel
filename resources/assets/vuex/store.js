@@ -38,7 +38,9 @@ const state = {
           'current_page': 0,
           'total_pages': 0
       }
-    }
+    },
+    cancelType: [],
+    cancelReason: []
 };
 
 const mutations = {
@@ -65,6 +67,12 @@ const mutations = {
     FETCH_INVENTORY_LISTS(state, inventoryLists, inventoryMeta) {
         state.inventoryLists = inventoryLists;
         state.inventoryMeta = inventoryMeta;
+    },
+    FETCH_CANCEL_TYPE(state, cancelType) {
+        state.cancelType = cancelType;
+    },
+    FETCH_CANCEL_REASON(state, cancelReason) {
+      state.cancelReason = cancelReason;
     }
 };
 
