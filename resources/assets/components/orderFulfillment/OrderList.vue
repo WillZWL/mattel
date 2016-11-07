@@ -71,7 +71,7 @@
                     Ready To Ship</button> &nbsp;&nbsp;
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
-            <button data-toggle="modal" data-target=".cancelorder" type="button" class="btn btn-danger btn-sm" v-on:click="fetchCancelReason()">
+            <button data-toggle="modal" data-target=".cancelorder" type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(order.id)">
               <i class="fa fa-trash-o"></i> Cancel
             </button>
           </template>
@@ -81,7 +81,7 @@
   </table>
 
   <div class="modal fade cancelorder" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <cancel-reason></cancel-reason>
+    <cancel-reason :cancelorders="cancelOrderList"></cancel-reason>
   </div>
 
   <pagination-component :meta="meta"></pagination-component>
@@ -108,7 +108,7 @@
             >Ready To Ship</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-danger"
             data-toggle="modal" data-target=".cancelorder"
-            v-on:click="fetchCancelReason()">
+            v-on:click="cancelOrder()">
             <i class="fa fa-trash-o"></i> Cancel</button>
   </div>
 </template>
@@ -120,7 +120,6 @@
   import {
       checkboxHelper,
       setReadyToShip,
-      cancelOrder,
       printPickingList,
       printInvoice,
       printAWBLable,
@@ -128,7 +127,8 @@
       fetchOrderDetail,
       scanTrackingNo,
       switchOrderStatusTab,
-      fetchCancelReason
+      fetchCancelReason,
+      getSelectedOrders
     } from '../../vuex/actions';
 
   import { getTableHeaders, getOrderDetail,getScanResult, getTabStatus, getOrdersMeta } from '../../vuex/getters';
@@ -138,7 +138,6 @@
       actions: {
         checkboxHelper,
         setReadyToShip,
-        cancelOrder,
         printPickingList,
         printInvoice,
         printAWBLable,
@@ -147,6 +146,7 @@
         vuexScanTrackingNo:scanTrackingNo,
         fetchOrderDetail,
         switchOrderStatusTab,
+        getSelectedOrders,
         fetchCancelReason
       },
       getters: {
@@ -172,10 +172,21 @@
     data() {
       return {
         scanResultList: [],
-        tracking_no: ''
+        tracking_no: '',
+        cancelOrderList: [],
       }
     },
     methods: {
+      cancelOrder: function(order = '')
+      {
+        this.cancelOrderList = [];
+        if (order) {
+          this.cancelOrderList.push(order);
+        } else {
+          this.cancelOrderList = this.getSelectedOrders();
+        }
+        this.fetchCancelReason();
+      },
       allocateOrders: function(orders = [])
       {
         $.isLoading({ text: "All order with available stock moving to Ready to Ship", class:"fa fa-refresh fa-spin" });

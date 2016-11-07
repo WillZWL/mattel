@@ -129,7 +129,12 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
         }else if (response.data.status=="failed"){
             alert(response.data.message);
         }
-    });
+    }).catch( function() {
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 1000)
+    })
 };
 
 /**
@@ -153,6 +158,10 @@ const _getSelectedOrders = ( selector = 'input:checkbox[name=id]:checked' ) => {
     return ids;
 };
 
+export const getSelectedOrders = ({ dispatch }) => {
+    var ids = _getSelectedOrders();
+    return ids;
+}
 
 export const setReadyToShip = ({ dispatch }, orders = []) => {
     var ids = _getSelectedOrders();
@@ -165,12 +174,13 @@ export const setReadyToShip = ({ dispatch }, orders = []) => {
     }
 };
 
-export const cancelOrder = ({ dispatch }, orders = []) => {
-    var ids = _getSelectedOrders();
-    if (ids) {
+export const postCancelOrder = ({ dispatch }, orders = [], type = '', reason = '') => {
+    if (orders) {
         var param = {
-            id: ids,
-            action: 'cancelOrder'
+            id: orders,
+            action: 'cancelOrder',
+            type: type,
+            reason: reason
         };
         _postOrderStatus(param);
     }

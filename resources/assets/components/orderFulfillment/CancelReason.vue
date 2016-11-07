@@ -21,7 +21,7 @@
             <div class="form-group col-md-12">
               <label class="control-label col-md-3">Name: </label>
               <div class="col-md-6 col-xs-12">
-                  <select class="form-control" name='name'>
+                  <select class="form-control" name='reason'>
                     <option></option>
                     <option v-for = "reason in reasons">{{ reason.reason_name }}</option>
                   </select>
@@ -30,17 +30,24 @@
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="submitCancel()">Submit</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { postCancelOrder } from '../../vuex/actions'
   import { getCancelType, getCancelReason } from '../../vuex/getters';
 
   export default {
+     props: [
+      'cancelorders'
+    ],
     vuex: {
+      actions: {
+        postCancelOrder
+      },
       getters: {
         cancelTypes: getCancelType,
         cancelReasons: getCancelReason
@@ -52,6 +59,19 @@
       }
     },
     methods: {
+      submitCancel() {
+        var orders = this.cancelorders;
+        var type = $("select[name='type']").val();
+        var reason = $("select[name='reason']").val();
+        if (reason && (orders.length > 0)) {
+          this.postCancelOrder(orders, type, reason);
+        } else {
+          $.isLoading({ text: "Please select reason and cancel orders", class:"fa-exclamation-triangle" });
+          setTimeout( function(){
+            $.isLoading("hide");
+          }, 2000)
+        }
+      },
       changeType() {
         var type = $("select[name='type']").val();
         var reasonArr = [];
