@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-// export const API_URL = 'http://vanguard/api/' // For DEV
-export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
+export const API_URL = 'http://vanguard/api/' // For DEV
+// export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
 
 export const newHeaders = [
               'BizType',
@@ -278,6 +278,28 @@ export const skuInventorySearch = ({ dispatch }, queryStr = '') => {
         setTimeout( function(){
             $.isLoading("hide");
         }, 3000)
+    });
+}
+
+export const fetchCancelReason = ({ dispatch }) => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    Vue.http({
+        url:API_URL+'merchant-api/order-cancel-reason',
+        method: 'POST'
+    }).then( function (response) {
+        $.isLoading("hide");
+        var cancelReason = [];
+        var type = []
+        for (var i in response.data) {
+            for (var j in response.data[i]) {
+                type.push(j);
+                for (var n = 0; n < response.data[i][j].length; n++) {
+                    cancelReason.push(response.data[i][j][n])
+                }
+            }
+        }
+        dispatch('FETCH_CANCEL_TYPE', type);
+        dispatch('FETCH_CANCEL_REASON', cancelReason);
     });
 }
 

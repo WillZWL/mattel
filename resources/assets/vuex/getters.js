@@ -17,3 +17,7 @@ export const getInventoryMeta = (state) => state.inventoryMeta;
 export const getScanResult = (state) => state.scanResult;
 
 export const getOrdersMeta = (state) => state.ordersMeta;
+
+export const getCancelType = (state) => state.cancelType;
+
+export const getCancelReason = (state) => state.cancelReason;

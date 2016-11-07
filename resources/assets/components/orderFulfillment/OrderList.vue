@@ -71,12 +71,18 @@
                     Ready To Ship</button> &nbsp;&nbsp;
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
-            <button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder([order.id])"><i class="fa fa-trash-o"></i> Cancel</button>
+            <button data-toggle="modal" data-target=".cancelorder" type="button" class="btn btn-danger btn-sm" v-on:click="fetchCancelReason()">
+              <i class="fa fa-trash-o"></i> Cancel
+            </button>
           </template>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="modal fade cancelorder" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <cancel-reason></cancel-reason>
+  </div>
 
   <pagination-component :meta="meta"></pagination-component>
 
@@ -101,13 +107,14 @@
             v-on:click="setReadyToShip()"
             >Ready To Ship</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-danger"
-            data-toggle="tooltip" data-placement="bottom" title="For selected orders"
-            v-on:click="cancelOrder()">
+            data-toggle="modal" data-target=".cancelorder"
+            v-on:click="fetchCancelReason()">
             <i class="fa fa-trash-o"></i> Cancel</button>
   </div>
 </template>
 <script>
   import OrderDetail from './OrderDetail.vue'
+  import CancelReason from './CancelReason.vue'
   import PaginationComponent from '../common/PaginationComponent.vue';
 
   import {
@@ -120,7 +127,8 @@
       printCarrierManifestLable,
       fetchOrderDetail,
       scanTrackingNo,
-      switchOrderStatusTab
+      switchOrderStatusTab,
+      fetchCancelReason
     } from '../../vuex/actions';
 
   import { getTableHeaders, getOrderDetail,getScanResult, getTabStatus, getOrdersMeta } from '../../vuex/getters';
@@ -138,7 +146,8 @@
         fetchOrderDetail,
         vuexScanTrackingNo:scanTrackingNo,
         fetchOrderDetail,
-        switchOrderStatusTab
+        switchOrderStatusTab,
+        fetchCancelReason
       },
       getters: {
         headers: getTableHeaders,
@@ -150,6 +159,7 @@
     },
     components: {
       OrderDetail,
+      CancelReason,
       PaginationComponent
     },
     props: [
