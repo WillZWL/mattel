@@ -9,7 +9,7 @@
               <th>Mattel SKU</th>
               <th>DC SKU</th>
               <th>Inventory</th>
-              <th>Thershold</th>
+              <th>Threshold</th>
             </tr>
           </thead>
           <tbody>
