@@ -86,7 +86,7 @@
 
   <pagination-component :meta="meta"></pagination-component>
 
-  <div v-if="id != 'table_content3'" class="x_content">
+  <div class="x_content">
     <button v-if="id == 'table_content2'" type="button" class="btn btn-default"
             data-toggle="tooltip" data-placement="bottom" title="For selected orders"
             v-on:click="printPickingList()"><i class="fa fa-print"></i>  Picking List</button>
@@ -110,6 +110,12 @@
             data-toggle="modal" data-target=".cancelorder"
             v-on:click="cancelOrder()">
             <i class="fa fa-trash-o"></i> Cancel</button>
+    <button type="button" class="btn btn-primary"
+             data-toggle="tooltip" data-placement="bottom" title="Download Report"
+             v-on:click="download()">
+            <i class="fa fa-print"></i> Download
+    </button>
+
   </div>
 </template>
 <script>
@@ -118,6 +124,7 @@
   import PaginationComponent from '../common/PaginationComponent.vue';
 
   import {
+      API_URL,
       checkboxHelper,
       setReadyToShip,
       printPickingList,
@@ -177,6 +184,11 @@
       }
     },
     methods: {
+      download: function()
+      {
+        var downloadUrl = API_URL+'export-orders?status='+this.status+'&access_token='+localStorage.access_token;
+        window.open(downloadUrl);
+      },
       cancelOrder: function(order = '')
       {
         this.cancelOrderList = [];
