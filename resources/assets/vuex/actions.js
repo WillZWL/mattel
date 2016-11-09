@@ -106,6 +106,10 @@ function _downloadDocument(documentUrl){
     }
 }
 
+export const downloadDocument = ({ dispatch }, documentUrl) => {
+    _downloadDocument(documentUrl);
+}
+
 /**
  * _postOrderStatus
  * @param  {Object} params
