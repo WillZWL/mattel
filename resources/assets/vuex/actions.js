@@ -90,9 +90,21 @@ const _getDocument = (params, url = 'merchant-api/order-fufillment') => {
     Vue.http.post(
         apiUrl, params
     ).then( function (response) {
-        window.open(response.data.document);
+        _downloadDocument(response.data.document);
     });
 };
+
+
+function _downloadDocument(documentUrl){
+    if(documentUrl !== null){
+        $('.tempLink').remove();
+        var link = document.createElement('a');
+        link.setAttribute('href', documentUrl);
+        link.setAttribute('class', 'tempLink');
+        $('body').append(link);
+        link.click();
+    }
+}
 
 /**
  * _postOrderStatus
@@ -175,7 +187,7 @@ export const postCancelOrder = ({ dispatch }, orders = [], type = '', reason = '
     }
 };
 
-export const printPickingList = ({ dispatch }, orders = []) => {
+export const printPickingList = ({ dispatch }) => {
     var ids = _getSelectedOrders();
     if (ids) {
         var param = {
@@ -186,12 +198,12 @@ export const printPickingList = ({ dispatch }, orders = []) => {
             apiUrl,
             param
         ).then( function (response) {
-            window.open(response.data.document);
+            _downloadDocument(response.data.document);
         });
     }
 };
 
-export const printInvoice = ({ dispatch }, orders = []) => {
+export const printInvoice = ({ dispatch }) => {
     var ids = _getSelectedOrders()
     if (ids) {
         var param = {
@@ -202,7 +214,7 @@ export const printInvoice = ({ dispatch }, orders = []) => {
     }
 };
 
-export const printAWBLable = ({ dispatch }, orders = []) => {
+export const printAWBLable = ({ dispatch }) => {
     var ids = _getSelectedOrders()
     if (ids) {
         var param = {
@@ -213,7 +225,7 @@ export const printAWBLable = ({ dispatch }, orders = []) => {
     }
 };
 
-export const printCarrierManifestLable = ({ dispatch }, orders = []) => {
+export const printCarrierManifestLable = ({ dispatch }) => {
     var ids = _getSelectedOrders()
     if (ids) {
         var param = {
@@ -223,6 +235,11 @@ export const printCarrierManifestLable = ({ dispatch }, orders = []) => {
         _getDocument(param);
     }
 };
+
+export const downloadInventoryReport = ( {dispatch} ) => {
+    var downloadUrl = API_URL + 'download-inventory-report?access_token='+localStorage.access_token;
+    _downloadDocument(downloadUrl);
+}
 
 export const scanTrackingNo = ( {dispatch}, tracking_no ) => {
     dispatch('SCAN_TRACKING_NO', {});
