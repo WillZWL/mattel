@@ -110,7 +110,7 @@
             data-toggle="modal" data-target=".cancelorder"
             v-on:click="cancelOrder()">
             <i class="fa fa-trash-o"></i> Cancel</button>
-    <button type="button" class="btn btn-primary"
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
              data-toggle="tooltip" data-placement="bottom" title="Download Report"
              v-on:click="download()">
             <i class="fa fa-print"></i> Download
@@ -135,7 +135,8 @@
       scanTrackingNo,
       switchOrderStatusTab,
       fetchCancelReason,
-      getSelectedOrders
+      getSelectedOrders,
+      downloadDocument
     } from '../../vuex/actions';
 
   import { getTableHeaders, getOrderDetail,getScanResult, getTabStatus, getOrdersMeta } from '../../vuex/getters';
@@ -154,7 +155,8 @@
         fetchOrderDetail,
         switchOrderStatusTab,
         getSelectedOrders,
-        fetchCancelReason
+        fetchCancelReason,
+        downloadDocument
       },
       getters: {
         headers: getTableHeaders,
@@ -187,7 +189,7 @@
       download: function()
       {
         var downloadUrl = API_URL+'export-orders?status='+this.status+'&access_token='+localStorage.access_token;
-        window.open(downloadUrl);
+        this.downloadDocument(downloadUrl);
       },
       cancelOrder: function(order = '')
       {
