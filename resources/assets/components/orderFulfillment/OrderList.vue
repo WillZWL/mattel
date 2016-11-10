@@ -39,7 +39,9 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-          <th v-for="header in headers">{{header}}</th>
+        <th v-for="header in headers">{{header}}</th>
+        <th>Order Items List</th>
+        <th v-if="id == 'table_content1'">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -62,9 +64,24 @@
         <td>{{order.update_date}}</td>
         <td>{{order.payment_method}}</td>
         <td>
-          <p v-for="(sku, qty) in order.items">{{sku}} Qty:{{qty}}</p>
+          <table class="table table-striped table-bordered">
+            <tr>
+              <td>SKU</td>
+              <td>Qty</td>
+              <td>Inventory</td>
+            </tr>
+            <tr v-for="item in order.items">
+              <td>{{ item.sku }}</td>
+              <td>{{ item.qty }}</td>
+              <template v-if="item.inventory < item.qty">
+                <td class="alert alert-warning">{{ item.inventory }}</td>
+              </template>
+              <template v-else>
+                <td>{{ item.inventory }}</td>
+              </template>
+            </tr>
+          </table>
         </td>
-        <td>{{order.inventory}}</td>
         <td v-if="id == 'table_content1'">
           <template v-if="id == 'table_content1'">
             <button v-if="order.inventory > order.order_qty" type="button" class="btn btn-sm btn-primary">

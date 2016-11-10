@@ -5,37 +5,15 @@ Vue.use(VueResource);
 // export const API_URL = 'http://vanguard/api/' // For DEV
 export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/'
 
-export const newHeaders = [
+export const tableHeaders = [
               'BizType',
               'Merchant',
               'Platform Order No',
               'Order Date',
               'Updated Date',
-              'Payment Method',
-              'Item QTY',
-              'Inventory',
-              'Action'
+              'Payment Method'
             ];
-export const readyHeaders = [
-              'BizType',
-              'Merchant',
-              'Platform Order No',
-              'Order Date',
-              'Updated Date',
-              'Payment Method',
-              'Item QTY',
-              'Inventory'
-            ];
-export const shippedHeaders = [
-              'BizType',
-              'Merchant',
-              'Platform Order No',
-              'Order Date',
-              'Updated Date',
-              'Payment Method',
-              'Item QTY',
-              'Inventory'
-            ];
+
 export const ordersMeta = {
     pagination: {
         'current_page': 0,
@@ -46,15 +24,7 @@ export const ordersMeta = {
 export const switchOrderStatusTab = ({ dispatch }, status = 'new', queryStr = '') => {
     dispatch('FETCH_ORDER_LISTS', [], ordersMeta);
     $.isLoading({ text: "Loading  "+ status + " orders", class:"fa fa-refresh fa-spin" });
-    if (status == 'new') {
-        dispatch('SET_TABLE_HEADERS', newHeaders);
-    }
-    if (status == 'ready') {
-        dispatch('SET_TABLE_HEADERS', readyHeaders);
-    }
-    if (status == 'shipped') {
-        dispatch('SET_TABLE_HEADERS', shippedHeaders);
-    }
+    dispatch('SET_TABLE_HEADERS', tableHeaders)
     dispatch('SET_TAB_STATUS', status);
     Vue.http({
         url:API_URL+'orders?status='+status+'&'+queryStr,
