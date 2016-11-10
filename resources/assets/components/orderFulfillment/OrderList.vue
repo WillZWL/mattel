@@ -84,8 +84,9 @@
         </td>
         <td v-if="id == 'table_content1'">
           <template v-if="id == 'table_content1'">
-            <button v-if="order.inventory > order.order_qty" type="button" class="btn btn-sm btn-primary">
-                    Ready To Ship</button> &nbsp;&nbsp;
+            <button v-if="isCanReadyToShip(order)" type="button" class="btn btn-sm btn-primary"
+                    v-on:click="setReadyToShip(order.id)">
+                    Ready To Ship</button>
             <button v-else type="button" class="btn btn-sm btn-default disabled not-allowed">
                     Ready To Ship</button>
             <button data-toggle="modal" data-target=".cancelorder" type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(order.id)">
@@ -199,7 +200,7 @@
       return {
         scanResultList: [],
         tracking_no: '',
-        cancelOrderList: [],
+        cancelOrderList: []
       }
     },
     methods: {
@@ -236,6 +237,20 @@
       pagination: function(url) {
         var query_str = $.url('query', url);
         this.switchOrderStatusTab(this.status, query_str);
+      },
+      isCanReadyToShip: function(order) {
+        var can = true;
+        $.each(order.items, function(key, item) {
+          if (item.qty > item.inventory) {
+            can = false;
+          }
+        });
+        return can;
+        if (disabled) {
+          return "btn-primary";
+        } else {
+          return "btn-default disabled not-allowed";
+        }
       }
     }
   }
