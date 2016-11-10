@@ -245,6 +245,11 @@ export const downloadInventoryReport = ( {dispatch} ) => {
     _downloadDocument(downloadUrl);
 }
 
+export const downloadMattelSkuMapping = ( {dispatch} ) => {
+    var downloadUrl = API_URL + 'download-mattel-sku-mapping?access_token='+localStorage.access_token;
+    _downloadDocument(downloadUrl);
+}
+
 export const scanTrackingNo = ( {dispatch}, tracking_no ) => {
     dispatch('SCAN_TRACKING_NO', {});
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });

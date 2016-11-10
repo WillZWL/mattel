@@ -30,8 +30,8 @@
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-              <input type="button" class="btn btn-dark" name='reset' value="Reset">
-              <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">
+              <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">&nbsp;&nbsp;
+              <button type="button" class="btn btn-primary" @click="download()"><i class="fa fa-print"></i> Download</button>
             </div>
           </div>
         </form>
@@ -40,12 +40,13 @@
   </div>
 </template>
 <script>
-import { mattelSkuMappingSearch } from '../../vuex/actions';
+import { mattelSkuMappingSearch, downloadMattelSkuMapping } from '../../vuex/actions';
 
 export default {
   vuex: {
     actions: {
-      submitForm: mattelSkuMappingSearch
+      submitForm: mattelSkuMappingSearch,
+      download: downloadMattelSkuMapping
     }
   },
   ready () {
