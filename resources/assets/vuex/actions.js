@@ -19,7 +19,7 @@ export const ordersMeta = {
         'current_page': 0,
         'total_pages': 0
     }
-}
+};
 
 export const switchOrderStatusTab = ({ dispatch }, status = 'new', queryStr = '') => {
     dispatch('FETCH_ORDER_LISTS', [], ordersMeta);
@@ -139,7 +139,12 @@ export const getSelectedOrders = ({ dispatch }) => {
 }
 
 export const setReadyToShip = ({ dispatch }, orders = []) => {
-    var ids = _getSelectedOrders();
+    var ids = [];
+    if (orders) {
+        ids.push(orders);
+    } else {
+        ids = _getSelectedOrders();
+    }
     if (ids) {
         var param = {
             id: ids,
