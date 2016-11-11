@@ -89,6 +89,7 @@ export const downloadDocument = ({ dispatch }, documentUrl) => {
 
 const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
     var apiUrl = API_URL + url;
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
     Vue.http.post(
         apiUrl, params
     ).then( function (response) {
@@ -104,6 +105,7 @@ const _postOrderStatus = (params, url = 'merchant-api/order-fufillment') => {
         }else if (response.data.status=="failed"){
             alert(response.data.message);
         }
+        $.isLoading("hide");
     }).catch( function() {
         $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
         setTimeout( function(){
@@ -138,7 +140,7 @@ export const getSelectedOrders = ({ dispatch }) => {
     return ids;
 }
 
-export const setReadyToShip = ({ dispatch }, orders = []) => {
+export const setReadyToShip = ({ dispatch }, orders = '') => {
     var ids = [];
     if (orders) {
         ids.push(orders);
