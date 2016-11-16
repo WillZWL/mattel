@@ -254,6 +254,12 @@ export const fetchOrderDetail = ({ dispatch }, order_id ) => {
         }).then(function (response) {
             dispatch('SET_ORDER_DETAIL', response.data.data[0]);
             $.isLoading("hide");
+        }).catch(function(){
+            $.isLoading("hide");
+            $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+            setTimeout( function(){
+                $.isLoading("hide");
+            }, 3000)
         });
     }
 };
