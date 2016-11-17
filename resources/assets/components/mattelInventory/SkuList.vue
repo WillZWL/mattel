@@ -8,8 +8,9 @@
               <th>WAREHOUSE ID</th>
               <th>Mattel SKU</th>
               <th>DC SKU</th>
-              <th>Inventory</th>
-              <th>Threshold</th>
+              <th width="15%">Inventory</th>
+              <th width="15%">Threshold</th>
+              <th width="10%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -17,8 +18,15 @@
               <td>{{ inventory.warehouse_id }}</td>
               <td>{{ inventory.mattel_sku }}</td>
               <td>{{ inventory.dc_sku }}</td>
-              <td>{{ inventory.inventory }}</td>
-              <td>{{ inventory.threshold }}</td>
+              <td>
+                <input type="number" class="form-control col-md-6 col-xs-12" id="inventory{{inventory.id}}"  value="{{ inventory.inventory }}">
+              </td>
+              <td>
+                <input type="number" class="form-control col-md-6 col-xs-12" id="threshold{{inventory.id}}" value="{{ inventory.threshold }}">
+              </td>
+              <td>
+                 <button type="button" class="btn btn-primary" @click="updateInventory(inventory.id)"><i class="fa fa-save"></i> Update</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -30,7 +38,7 @@
 
 <script>
   import PaginationComponent from '../common/PaginationComponent.vue';
-  import { skuInventorySearch } from '../../vuex/actions';
+  import { skuInventorySearch, API_URL } from '../../vuex/actions';
   import { getInventoryLists, getInventoryMeta } from '../../vuex/getters';
   export default {
     components: {
@@ -49,6 +57,43 @@
       pagination: function(url) {
         var query_str = $.url('query', url);
         this.submitForm(query_str);
+      },
+      updateInventory: function(id) {
+        var instance = this;
+        var inventorys = this.inventorys;
+        var postData = {};
+
+        var inventory = $('#inventory'+id).val();
+        var threshold = $('#threshold'+id).val();
+        console.log(inventory);
+        inventorys.filter(function (inventoryObj) {
+          if (inventoryObj.id == id) {
+            postData = inventoryObj;
+          }
+        });
+        postData.inventory = inventory;
+        postData.threshold = threshold;
+        $.isLoading({ text: "Updating", class:"fa fa-refresh fa-spin" });
+        this.$http.post(
+          API_URL+'platform-market-inventory',
+          postData
+        ).then( function(response) {
+          $.isLoading("hide");
+          if (response.data.success) {
+              $.isLoading({ text:response.data.message, class:"fa fa-check" });
+          } else {
+              $.isLoading({ text:response.data.message, class:"fa fa-exclamation-triangle" });
+          }
+          setTimeout( function(){
+              $.isLoading("hide");
+          }, 3000);
+        }).catch(function(){
+            $.isLoading("hide");
+            $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+            setTimeout( function(){
+                $.isLoading("hide");
+            }, 3000);
+        });
       }
     }
   }
